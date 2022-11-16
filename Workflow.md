@@ -7,7 +7,7 @@ Julia promises the best of both worlds: quick interactive development and good r
 
 Fortunately, with the proper system settings you can dramatically improve your programming workflow. This document will show you how to set up your programming environment to maximise interactivity and make your workflow smooth and quick.
 
-Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use large packages, especially those related to plotting, it can take a long time to load these packages.
+Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, ans perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use large packages, especially those related to plotting, it can take a long time to load these packages.
 
 The fundamental cause is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code can be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
 
