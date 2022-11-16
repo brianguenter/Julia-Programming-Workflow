@@ -204,5 +204,7 @@ function f(x)
  ```
 ### For VSCode
 Type F12 to go to a function definition.
+
 Type ctrl-shift-o to open a menu to search for a function definition.
+
 Define go back and go forward keys. Open the keyboard shortcuts menu: File->Preferences->Keyboard Shortcuts. On my machines I define these to be alt-← for go back and alt-→ for go forward.
