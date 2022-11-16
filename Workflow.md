@@ -13,7 +13,7 @@ The fundamental cause is that Julia is a compiled language, with compilation del
 
 For example, a package I worked on, OpticSim.jl, takes 380 seconds to load on my computer. The OpticSim code itself takes only 600ms to load; the remaining 379.4 seconds is spent loading and compiling packages that OpticSim uses. After using the environment settings described later in this document OpticSim load time was reduced to .
 
-The Julia community is actively working on this problem but for now it is a limitation that has to be worked around. 
+The Julia community is actively working on this problem but for now it is a limitation that must be worked around. 
 
 Another common beginner problem is how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about your code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
