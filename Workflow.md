@@ -17,7 +17,9 @@ The Julia community is actively working on this problem but for now it is a limi
 
 Another common beginner problem is how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about your code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
-The remainder of this document contains instructions for setting up your Julia environment for maximum efficiency and ease of use. You should perform these steps in the order they appear in this document. Some functionality will not work if you change this order.
+Finally, there are tips and tricks that truly are not well documented that make programming in Julia more pleasant. The last section of the document has short descriptions of several that will be useful to a broad audience. 
+
+You should perform the environment setup steps steps in the order they appear in this document. Some functionality will not work if you change this order.
 
 ## Get an account on Julia Discourse
 Don't skip this step in your eagerness to begin programming. Sooner or later, most likely sooner, you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
@@ -55,7 +57,7 @@ Now that Julia is installed you should create a `startup.jl` file. The instructi
 
 If you are a less experienced programmer the file you will create in this section is all you will need. More advanced programmers will want to also look at the Advanced setup.jl file section.
 
-On linux the startup file is located at `~\.julia\config\startup.jl`. Create the `config` directory if it doesn't exist. Create a file named `startup.jl` in this directory and copy this text to it. 
+On linux the startup file is located at `~\.julia\config\startup.jl`. On Windows the file will be at `C:\Users\YourUserName\.julia\config\startup.jl` Create the `config` directory if it doesn't already exist. Create a file named `startup.jl` in this directory and copy this text to it. 
 
 ```
 using Pkg
