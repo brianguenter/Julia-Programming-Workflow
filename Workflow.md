@@ -183,6 +183,7 @@ If you add a new package in the package editor your sysimage will not be automat
 
 
 ## Tips and tricks
+### For the REPL
 Finding out how to type a symbol. Type ? at the REPL prompt to enter help mode then copy and paste the symbol into the REPL and hit enter:
 ```
 help?> ∢
@@ -201,4 +202,7 @@ function f(x)
        return (y,x) #use alt-enter to create a new line here
        end
  ```
-
+### For VSCode
+Type F12 to go to a function definition.
+Type ctrl-shift-o to open a menu to search for a function definition.
+Define go back and go forward keys. Open the keyboard shortcuts menu: File->Preferences->Keyboard Shortcuts. On my machines I define these to be alt-← for go back and alt-→ for go forward.
