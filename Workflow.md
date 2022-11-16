@@ -86,7 +86,9 @@ The OhMyREPL package enhances the REPL by adding support for context sensitive c
 If you are a beginner you won't need more packages in your `setup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
 
 ## Advanced setup.jl file
-This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code:
+This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github and have never benchmarked code you should skip this section.
+
+Create this `setup.jl` instead of the basic `startup.jl` file:
 ```
 using Pkg
 
