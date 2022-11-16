@@ -184,6 +184,8 @@ If you add a new package in the package editor your sysimage will not be automat
 
 ## Tips and tricks
 ### For the REPL
+Type ? to enter help mode. Type `]` to enter package mode. Type `;` to enter shell mode.
+
 Finding out how to type a symbol. Type ? at the REPL prompt to enter help mode then copy and paste the symbol into the REPL and hit enter:
 ```
 help?> ∢
