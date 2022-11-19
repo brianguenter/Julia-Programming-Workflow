@@ -42,6 +42,8 @@ Beginning Julia programmers have difficulty with a small set of problems that ar
 
 The fundamental cause of this delay is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
 
+This is likely to change within a year or two because the Julia community is actively working to solve the startup latency problem.
+
 Another common beginner problem is figuring out how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
 Finally, there are tips and tricks that are broadly useful but whose documentation is scattered and difficult to find. The last section of the document has short descriptions of several. 
