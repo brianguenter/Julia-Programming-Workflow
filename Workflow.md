@@ -144,7 +144,7 @@ end
  
 ENV["JULIA_EDITOR"] = "code.cmd"
 ```
-* [PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl) adds functionality that is especially useful if your code is on a github repos.
+* [PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl) adds functionality that is especially useful if your code is on a github repo.
 * [Infiltrator](https://github.com/JuliaDebug/Infiltrator.jl) is a low overhead way of inserting breakpoints in your code. Julia has an interactive debugger but it can be painfully slow if your code does significant computation. Infiltrator is fast but not as full featured as the debugger.
 * [BenchmarkTools](https://github.com/JuliaCI/BenchmarkTools.jl) adds tools for benchmarking code. These tools will help you find and fix inefficient code.
 
