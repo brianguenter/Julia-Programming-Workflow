@@ -149,8 +149,8 @@ ENV["JULIA_EDITOR"] = "code.cmd"
 * [BenchmarkTools](https://github.com/JuliaCI/BenchmarkTools.jl) adds tools for benchmarking code. These tools will help you find and fix inefficient code.
 
 ### Other startup packages to consider
-[InteractiveCodeSearch](https://github.com/tkf/InteractiveCodeSearch.jl) is great for finding the source locations of functions from the REPL. It requires the installation of peco, which is easy on Linux but more complicated on Windows.
-[AbbreviatedStackTraces](https://github.com/BioTurboNick/AbbreviatedStackTraces.jl) reduces the size of Julia stack traces, which can be incredibly long. Most of the time you only need to see a small part of the trace directly connected to your code. AbbreviatedStackTraces shrinks stack traces to reduce irrelevant text.
+* [InteractiveCodeSearch](https://github.com/tkf/InteractiveCodeSearch.jl) is great for finding the source locations of functions from the REPL. It requires the installation of peco, which is easy on Linux but more complicated on Windows.
+* [AbbreviatedStackTraces](https://github.com/BioTurboNick/AbbreviatedStackTraces.jl) reduces the size of Julia stack traces, which can be incredibly long. Most of the time you only need to see a small part of the trace directly connected to your code. AbbreviatedStackTraces shrinks stack traces to reduce irrelevant text.
 
 Don't add too many packages to your `startup.jl` file. Each package takes time to load and this overhead is incurred every time you start the REPL.
 
