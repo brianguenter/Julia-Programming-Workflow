@@ -5,23 +5,21 @@ Julia promises the best of both worlds: quick interactive development and good r
 
 Fortunately, with the proper system settings you can dramatically improve your programming workflow. This document will show you how to set up your programming environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
 
-This document explains how to set up your Julia environment for fast and smooth workflow. This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead. 
+This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead. 
 
-An intermediate level of programming experience is necessary to follow these instructions. If you are an absolute beginner you may find it difficult to correctly carry out the instructions in this document. If you use Julia primarily as a scripting language and don't want to be bothered with creating projects for your code or using the VSCode IDE then this document will be overkill for you.
+An intermediate level of programming experience is necessary to follow these instructions. You should be comfortable working with command line interfaces. If you are an absolute beginner you may find it difficult to correctly carry out the instructions in this document. If you use Julia primarily as a scripting language, or you do all your work in Jupyter or Pluto notebooks then this document will be overkill for you.
 
-Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, and perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. 
-
-If your project use large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session.
+Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, and perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer.
 
 The fundamental cause is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
 
-For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer. After using the environment settings described later in this document OpticSim load time was reduced to 866ms, 113 times faster with a sysimage than without one.
+After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
 Another common beginner problem is figuring out how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
-Finally, there are tips and tricks that truly are not well documented that make programming in Julia more pleasant. The last section of the document has short descriptions of several that will be useful to a broad audience. 
+Finally, there are tips and tricks that are broadly useful but whose documentation is scattered and difficult to find. The last section of the document has short descriptions of several. 
 
-You should perform the environment setup steps steps in the order they appear in this document. Some functionality will not work if you change this order.
+You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.
 
 ## Get an account on Julia Discourse
 Don't skip this step in your eagerness to begin programming. Sooner or later, most likely sooner, you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
@@ -180,15 +178,38 @@ If you add a new package in the package editor or update your packages the sysim
 There is one more step to complete the custom sysimage setup, starting a `Task` that computes the sysimage. But this command palette option only is displayed for Julia projects and you don't have one of those yet. Once you've made your first project you can finish this step and compile the sysimage.
 
 
-## Create your first project
+### Create your first project
 Projects are not required for writing and executing Julia code but I strongly recommend that you use projects for all your Julia code. Many of the Julia tools assume that you have your code organized as projects and won't work well, or sometimes at all, if you don't have a project. Your workflow will be smoother and less error prone if you use projects.
 
-You don't need to understand what projects are or how they work until you become more experienced. For now you only need to set them up.
+As you become more experienced you will want to learn [more](https://pkgdocs.julialang.org/v1/) about packages and how they are managed. For now you can treat the package infrastructure largely as a black box; you just need to know how to create one.
 
-beginner use generate, advanced use PkgTemplates.
+Open a command window in a directory where you want to put your package. Type `julia` at the command window prompt. Once the REPL starts type `]` to enter package manager mode. Let's assume your package is called Package1. Type `generate Package1` and hit enter. The package manager will create a new directory called `Package1`.
+
+To edit the package in VSCode select the open folder menu item (File->Open Folder) and navigate to the directory `Package1`. Do not navigate to the `src` subdirectory contained inside the `Package1` directory; VSCode depends on being started at the top level directory of your package to find the information it needs to set up its environment properly.
+
+### Add packages to your project
+In VSCode use the folder view to show the files in your project. Right click on the `src` directory and select `New File` from the menu. Call this file `FirstProgram.jl`. Use the folder view to open `FirstProgram.jl` and type this:
+
+```
+module Package1
+
+using Plots
+
+function first_plot()
+    x = 1:10; y = rand(10); # These are the plotting data
+    plot(x, y)
+end
+export first_plot
+
+end #module
+```
+
+Now open a Julia REPL in VSCode. Open the command pallette (ctrl-shift-p) and type `Julia: Start REPL`. In the REPL type `]` to enter package manager mode. Type `add Plots` and hit enter. The package manager will download the `Plots` package from the Julia registry so your program will be able to find it when you execute the first_plot program.
+
+Exit package manager mode by typing backspace and then type `using Package`. After your package loads type `first_plot()`. This should display a simple plot on a plot window in VSCode.
 
 ### Finish setting up a custom sysimage
-Now that you have a project defined you should finish setting up a custom sysimage. Recall that this step couldn't be completed until you had created your first project. 
+Now that you have a project defined you should finish setting up a custom sysimage so that your package will load as quickly as possible. Recall that this step couldn't be completed until you had created your first project. 
 
 To create a custom sysimage open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
 
