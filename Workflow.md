@@ -1,23 +1,27 @@
 # Efficient Programming Workflow in Julia
-This document explains how to set up your Julia environment for the fastest and smoothest workflow. This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead.
+This document explains how to set up your Julia environment for fast and smooth workflow. This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead.
 
-Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a soloution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
+Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
 
 Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then, as of late 2022, Julia largely delivers on this promise. Unfortunately, the default installation of Julia will not give you this experience.
 
-Fortunately, with the proper system settings you can dramatically improve your programming workflow. This document will show you how to set up your programming environment to maximise interactivity and make your workflow smooth and quick.
+Fortunately, with the proper system settings you can dramatically improve your programming workflow. This document will show you how to set up your programming environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
 
-Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use large packages, especially those related to plotting, it can take a long time to load these packages.
+Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. 
 
-The fundamental cause is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code can be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
+If your project use large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session.
 
-For example, a package I worked on, OpticSim.jl, takes 380 seconds to load on my computer. The OpticSim code itself takes only 600ms to load; the remaining 379.4 seconds is spent loading and compiling packages that OpticSim uses. After using the environment settings described later in this document OpticSim load time was reduced to .
+The fundamental cause is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
 
-The Julia community is actively working on this problem but for now it is a limitation that has to be worked around. 
+For example, a package I worked on, OpticSim.jl, takes 380 seconds to load on my computer. The OpticSim code itself takes only 600ms to load; the remaining 379.4 seconds is spent loading and compiling packages that OpticSim uses. After using the environment settings described later in this document OpticSim load time was reduced to a few seconds.
+
+The Julia community is actively working on this problem but for now it is a limitation that must be worked around. 
 
 Another common beginner problem is how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about your code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
-The remainder of this document contains instructions for setting up your Julia environment for maximum efficiency and ease of use. You should perform these steps in the order they appear in this document. Some functionality will not work if you change this order.
+Finally, there are tips and tricks that truly are not well documented that make programming in Julia more pleasant. The last section of the document has short descriptions of several that will be useful to a broad audience. 
+
+You should perform the environment setup steps steps in the order they appear in this document. Some functionality will not work if you change this order.
 
 ## Get an account on Julia Discourse
 Don't skip this step in your eagerness to begin programming. Sooner or later, most likely sooner, you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
@@ -55,7 +59,7 @@ Now that Julia is installed you should create a `startup.jl` file. The instructi
 
 If you are a less experienced programmer the file you will create in this section is all you will need. More advanced programmers will want to also look at the Advanced setup.jl file section.
 
-On linux the startup file is located at `~\.julia\config\startup.jl`. Create the `config` directory if it doesn't exist. Create a file named `startup.jl` in this directory and copy this text to it. 
+On linux the startup file is located at `~\.julia\config\startup.jl`. On Windows the file will be at `C:\Users\YourUserName\.julia\config\startup.jl` Create the `config` directory if it doesn't already exist. Create a file named `startup.jl` in this directory and copy this text to it. 
 
 ```
 using Pkg
@@ -84,7 +88,9 @@ The OhMyREPL package enhances the REPL by adding support for context sensitive c
 If you are a beginner you won't need more packages in your `setup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
 
 ## Advanced setup.jl file
-This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code:
+This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github and have never benchmarked code you should skip this section.
+
+Create this `setup.jl` instead of the basic `startup.jl` file:
 ```
 using Pkg
 
@@ -189,5 +195,31 @@ At times the sysimage compilation process will error. This usually happens becau
 If you add a new package in the package editor your sysimage will not be automatically updated. Every time you add a package you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
 
 
+## Tips and tricks
+### For the REPL
+Type ? to enter help mode. Type `]` to enter package mode. Type `;` to enter shell mode.
 
+Finding out how to type a symbol. Type ? at the REPL prompt to enter help mode then copy and paste the symbol into the REPL and hit enter:
+```
+help?> ∢
+"∢" can be typed by \sphericalangle<tab>
+```
+Creating a new line in an existing function definition in the REPL. Suppose you have this function and want to add a line after `y=sqrt(x)`
+```
+julia> function f(x)
+       y = sqrt(x)
+       end
+```
+Type `↑` to display the function again in the REPL. Then type `←` to move the cursor into the function text. Use `↑` to move the cursor to where you want to enter a new line and type alt-enter.
+```
+function f(x)
+       y = sqrt(x)
+       return (y,x) #use alt-enter to create a new line here
+       end
+ ```
+### For VSCode
+Type F12 to go to a function definition.
 
+Type ctrl-shift-o to open a menu to search for a function definition.
+
+Define go back and go forward keys. Open the keyboard shortcuts menu: File->Preferences->Keyboard Shortcuts. On my machines I define these to be alt-← for go back and alt-→ for go forward.
