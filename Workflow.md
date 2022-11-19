@@ -1,4 +1,31 @@
 # Efficient Programming Workflow in Julia
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Efficient Programming Workflow in Julia](#efficient-programming-workflow-in-julia)
+  - [Introduction](#introduction)
+  - [Problems with Julia](#problems-with-julia)
+- [Set up your environment](#set-up-your-environment)
+  - [Get an account on Julia Discourse](#get-an-account-on-julia-discourse)
+  - [Install Julia](#install-julia)
+  - [Create a basic startup.jl file](#create-a-basic-startupjl-file)
+  - [Advanced setup.jl file](#advanced-setupjl-file)
+    - [Other startup packages to consider](#other-startup-packages-to-consider)
+  - [Install VSCode](#install-vscode)
+    - [Set `Auto-Save` to `onFocusChange`](#set-auto-save-to-onfocuschange)
+    - [Set `Julia:Num Threads`](#set-julianum-threads)
+    - [Create your first project](#create-your-first-project)
+    - [Add packages to your project](#add-packages-to-your-project)
+    - [Set `Julia:use an existing custom sysimage when starting the REPL`](#set-juliause-an-existing-custom-sysimage-when-starting-the-repl)
+    - [Finish setting up a custom sysimage](#finish-setting-up-a-custom-sysimage)
+  - [Tips and tricks](#tips-and-tricks)
+    - [For the REPL](#for-the-repl)
+
+<!-- /code_chunk_output -->
+
+## Introduction
 Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
 
 Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then, as of late 2022, Julia largely delivers on this promise. Unfortunately, the default installation of Julia will not give you this experience.
@@ -9,11 +36,11 @@ This is not a tutorial on the Julia programming language. If that's what you wan
 
 An intermediate level of programming experience is necessary to follow these instructions. You should be comfortable working with command line interfaces. If you are an absolute beginner you may find it difficult to correctly carry out the instructions in this document. If you use Julia primarily as a scripting language, or you do all your work in Jupyter or Pluto notebooks then this document will be overkill for you.
 
-Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, and perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer.
+## Problems with Julia
 
-The fundamental cause is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
+Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, and perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use several large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer. After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
-After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
+The fundamental cause of this delay is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
 
 Another common beginner problem is figuring out how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
@@ -21,8 +48,9 @@ Finally, there are tips and tricks that are broadly useful but whose documentati
 
 You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.
 
+# Set up your environment
 ## Get an account on Julia Discourse
-Don't skip this step in your eagerness to begin programming. Sooner or later, most likely sooner, you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
+Don't skip this step in your eagerness to begin programming. Eventually you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
 
 Whether you are a beginner or an expert you should get an account on the Julia [discourse](https://discourse.julialang.org/) forum. The Julia community is friendly and helpful and you are likely to get an answer to your question within 24 hours. Read [this](https://discourse.julialang.org/t/please-read-make-it-easier-to-help-you/14757) before posting.
 
@@ -86,7 +114,7 @@ The OhMyREPL package enhances the REPL by adding support for context sensitive c
 If you are a beginner you won't need more packages in your `setup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
 
 ## Advanced setup.jl file
-This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github and have never benchmarked code you should skip this section.
+This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github or have never benchmarked code you should skip this section.
 
 Create this `setup.jl` instead of the basic `startup.jl` file:
 ```
@@ -114,8 +142,8 @@ end
  
 ENV["JULIA_EDITOR"] = "code.cmd"
 ```
-* [PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl) will be covered in the section Create a new project. It adds functionality that is especially useful for github repos.
-* [Infiltrator](https://github.com/JuliaDebug/Infiltrator.jl) is a low overhead way of inserting breakpoints in your code. It will be covered in the section Debugging. Julia has an interactive debugger but it can be painfully slow if your code does significant computation. Infiltrator is fast but not as full featured as the debugger.
+* [PkgTemplates](https://github.com/JuliaCI/PkgTemplates.jl) adds functionality that is especially useful if your code is on a github repos.
+* [Infiltrator](https://github.com/JuliaDebug/Infiltrator.jl) is a low overhead way of inserting breakpoints in your code. Julia has an interactive debugger but it can be painfully slow if your code does significant computation. Infiltrator is fast but not as full featured as the debugger.
 * [BenchmarkTools](https://github.com/JuliaCI/BenchmarkTools.jl) adds tools for benchmarking code. These tools will help you find and fix inefficient code.
 
 ### Other startup packages to consider
@@ -124,22 +152,21 @@ ENV["JULIA_EDITOR"] = "code.cmd"
 
 Don't add too many packages to your `startup.jl` file. Each package takes time to load and this overhead is incurred every time you start the REPL.
 
-
 ## Install VSCode
-This document assumes you will be using VSCode as your Julia IDE. It has the best support and features of the available IDE's. With VSCode installed you will rarely need to leave the IDE since the Julia language extension adds support for an interactive REPL panel and for plotting.
+This document assumes you will be using VSCode as your Julia IDE. It has the best support and features of the available IDE's. With VSCode installed you will rarely need to leave the IDE since the Julia language extension adds support for an interactive REPL panel, notebooks, and plotting.
 
 Install VSCode from here https://code.visualstudio.com/Download. Start VSCode and click on the extension manager. Type `julia` in the extension manager search window and install the Julia language extension.
 
 The remaining setup instructions in this section are executed from within VSCode. You will need a running instance of VSCode to make these changes.
 
 ### Set `Auto-Save` to `onFocusChange`
-Type `ctrl-shift-p` to open the command palette. Type `settings` in the command palette search window and select `Preferences:Open Settings (UI)`. Type `Files:Auto Save` in the settings search bar. On the drop down menu select `onFocusChange`. This will configure VSCode to automatically save your files when the cursor moves from a text editor window to a Julia command prompt window. 
-
 This setting will make the view of your source in the VSCode text editor and the dynamic state of the interactive REPL session more consistent. One of the disadvantages of interactive programming systems is that the source text you are editing in VSCode and the definitions of functions, constants, etc., in the interactive session window can get out of sync. You change a function definition in the text editor and save the file but forget to evaluate the new definition in the interactive window so it still has the old definition. This can be very confusing.
 
 The combination of Revise and auto save on focus change can almost completely eliminate this problem. Whenever the cursor moves out of the text editor window the file will be saved. Revise will detect this change and update the interactive environment in the REPL. What you see in the text editor will be a close match to what is defined in the REPL. 
 
-There are a some changes Revise will not update for you: 
+Type `ctrl-shift-p` to open the command palette. Type `settings` in the command palette search window and select `Preferences:Open Settings (UI)`. Type `Files:Auto Save` in the settings search bar. On the drop down menu select `onFocusChange`. This will configure VSCode to automatically save your files when the cursor moves from a text editor window to a Julia command prompt window. 
+
+There are some changes Revise will not update for you: 
 * changes to a `struct` definition
 * changes to a `const`
 
@@ -150,34 +177,6 @@ By default VSCode starts Julia with 1 thread enabled. To automatically enable th
 ```
    "julia.NumThreads": "auto"
 ```
-
-### Set `Julia:use an existing custom sysimage when starting the REPL`
-Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. 
-
-You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue for you, which it almost always is, then you should use a precompiled sysimage.
-
-Sometimes compiling a sysimage doesn't work. A fix that frequently works is to update all your packages. To update your packages type `]` at the `julia` command prompt to enter the package manager and type `update`. Then try running the sysimage task again.
-
-If updating your packages didn't fix the problem you may have a package that won't compile into a sysimage. You'll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail and then set up package compilation to not include them in the sysimage. 
-
-You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/). See the link for detailed instructions. 
-
-The contents of `JuliaSysimage.toml` will look like this:
-```
-[sysimage]
-exclude=["AbbreviatedStackTraces"]   # Additional packages to be excluded in the system image
-statements_files=[]  # Precompile statements files to be used, relative to the project folder
-execution_files=[] # Precompile execution files to be used, relative to the project folder
-```
-In this case I've excluded the `AbbreviatedStackTraces` package just for purposes of illustration. Your `JuliaSysimage.toml` may require different packages to be excluded. Notice that the names of the packages to be excluded must be in double quotes.
-
-By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
-
-If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contains the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
-
-There is one more step to complete the custom sysimage setup, starting a `Task` that computes the sysimage. But this command palette option only is displayed for Julia projects and you don't have one of those yet. Once you've made your first project you can finish this step and compile the sysimage.
-
-
 ### Create your first project
 Projects are not required for writing and executing Julia code but I strongly recommend that you use projects for all your Julia code. Many of the Julia tools assume that you have your code organized as projects and won't work well, or sometimes at all, if you don't have a project. Your workflow will be smoother and less error prone if you use projects.
 
@@ -208,12 +207,30 @@ Now open a Julia REPL in VSCode. Open the command pallette (ctrl-shift-p) and ty
 
 Exit package manager mode by typing backspace and then type `using Package`. After your package loads type `first_plot()`. This should display a simple plot on a plot window in VSCode.
 
+### Set `Julia:use an existing custom sysimage when starting the REPL`
+Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue for you, which it almost always is, then you should use a precompiled sysimage.
+
+By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
+
+If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contains the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
+
+Sometimes compiling a sysimage doesn't work. A fix that frequently works is to update all your packages. To update your packages type `]` at the `julia` command prompt to enter the package manager and type `update`. Then try running the sysimage task again.
+
+If updating your packages didn't fix the problem you may have a package that won't compile into a sysimage. You'll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail. You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/). See the link for detailed instructions. 
+
+The contents of `JuliaSysimage.toml` will look like this:
+```
+[sysimage]
+exclude=["FailingPackage1","FailingPackage2"]   # Additional packages to be excluded in the system image
+statements_files=[]  # Precompile statements files to be used, relative to the project folder
+execution_files=[] # Precompile execution files to be used, relative to the project folder
+```
+Notice that the names of the packages to be excluded must be in double quotes.
+
 ### Finish setting up a custom sysimage
-Now that you have a project defined you should finish setting up a custom sysimage so that your package will load as quickly as possible. Recall that this step couldn't be completed until you had created your first project. 
+So far you've told VSCode you want to use a custom sysimage. Now you need to compile the sysimage. Open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
 
-To create a custom sysimage open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
-
-This will compile the files necessary to start your project into a single large file which will be loaded when you type using "YourProjectName" at the REPL. If your project has many dependencies this can reduce the load time for your project from minutes to seconds.
+This will compile the files necessary to start your project into a single large file which will be loaded at startup time. If your project has many dependencies this can reduce the load time for your project from a minute or more to a fraction of a second.
 
 ## Tips and tricks
 ### For the REPL
@@ -240,6 +257,6 @@ function f(x)
 ### For VSCode
 Type F12 to go to a function definition.
 
-Type ctrl-shift-o to open a menu to search for a function definition.
+Type ctrl-shift-o to open a menu to search for a function definition by name.
 
 Define go back and go forward keys. Open the keyboard shortcuts menu: File->Preferences->Keyboard Shortcuts. On my machines I define these to be alt-← for go back and alt-→ for go forward.
