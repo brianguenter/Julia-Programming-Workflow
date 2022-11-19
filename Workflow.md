@@ -216,6 +216,11 @@ By default VSCode is not configured to use compiled sysimages. Turn this feature
 
 If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contains the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
 
+### Finish setting up a custom sysimage
+So far you've told VSCode you want to use a custom sysimage. Now you need to compile the sysimage. Open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
+
+This will compile the files necessary to start your project into a single large file which will be loaded at startup time. If your project has many dependencies this can reduce the load time for your project from a minute or more to a fraction of a second.
+
 Sometimes compiling a sysimage doesn't work. A fix that frequently works is to update all your packages. To update your packages type `]` at the `julia` command prompt to enter the package manager and type `update`. Then try running the sysimage task again.
 
 If updating your packages didn't fix the problem you may have a package that won't compile into a sysimage. You'll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail. You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/). See the link for detailed instructions. 
@@ -228,11 +233,6 @@ statements_files=[]  # Precompile statements files to be used, relative to the p
 execution_files=[] # Precompile execution files to be used, relative to the project folder
 ```
 Notice that the names of the packages to be excluded must be in double quotes.
-
-### Finish setting up a custom sysimage
-So far you've told VSCode you want to use a custom sysimage. Now you need to compile the sysimage. Open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
-
-This will compile the files necessary to start your project into a single large file which will be loaded at startup time. If your project has many dependencies this can reduce the load time for your project from a minute or more to a fraction of a second.
 
 ## Tips and tricks
 ### For the REPL
