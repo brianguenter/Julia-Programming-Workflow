@@ -34,7 +34,7 @@ Fortunately, with the proper system settings you can dramatically improve your p
 
 This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead. 
 
-An intermediate level of programming experience is necessary to follow these instructions. You should be comfortable working with command line interfaces. If you are an absolute beginner you may find it difficult to correctly carry out the instructions in this document. If you use Julia primarily as a scripting language, or you do all your work in Jupyter or Pluto notebooks then this document will be overkill for you.
+An intermediate level of programming experience is necessary to follow these instructions. You should be comfortable working with command line interfaces. If you are an absolute beginner you may find it difficult to correctly carry out these instructions. If you use Julia primarily as a scripting language, or you do all your work in Jupyter or Pluto notebooks then this document will be overkill for you.
 
 ## Beginner problems with Julia
 
