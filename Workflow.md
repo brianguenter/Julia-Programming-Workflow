@@ -175,7 +175,7 @@ In this case I've excluded the `AbbreviatedStackTraces` package. Your `JuliaSysi
 
 By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
 
-If you add a new package in the package editor your sysimage will not be automatically updated. Every time you add a package you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
+If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contains the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
 
 There is one more step to complete the custom sysimage setup, starting a `Task` that computes the sysimage. But this command palette option only is displayed for Julia projects and you don't have one of those yet. Once you've made your first project you can finish this step and compile the sysimage.
 
