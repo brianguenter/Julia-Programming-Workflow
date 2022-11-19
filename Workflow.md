@@ -167,7 +167,7 @@ You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml`
 The contents of `JuliaSysimage.toml` will look like this:
 ```
 [sysimage]
-exclude=["AbbreviatedStackTraces"]   # Additional packages to be exlucded in the system image
+exclude=["AbbreviatedStackTraces"]   # Additional packages to be excluded in the system image
 statements_files=[]  # Precompile statements files to be used, relative to the project folder
 execution_files=[] # Precompile execution files to be used, relative to the project folder
 ```
