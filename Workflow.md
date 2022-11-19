@@ -148,9 +148,22 @@ By default VSCode starts Julia with 1 thread enabled. To automatically enable th
 ```
 
 ### Set `Julia:use an existing custom sysimage when starting the REPL`
-Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue, which it almost always is, then you should use a precompiled sysimages. This can be down with a script or, more conveniently, VSCode has built in tools to generate the custom sysimage with a button click.
+Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue, which it almost always is, then you should use a precompiled sysimages. This can be down with a script or, more conveniently, you can use the VSCode UI to do it interactively.
 
-Open the command palette and type `Preferences:Open Settings (UI)`. Type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
+Compiling a sysimage mostly works. Some packages however, won't compile into a sysimage. For example, AbbreviatedStackTraces has a `precompile=false` directive which the package compiler can't handle. `Plots` can also be troublesome. You'll have to find the packages which are causing precompilation to fail and tell the package compiler not to include them in the sysimage.
+
+You do this by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/) which tells VSCode which packages to exclude. See the link for detailed instructions. 
+
+The contents of `JuliaSysimage.toml` will look like this:
+```
+[sysimage]
+exclude=["AbbreviatedStackTraces"]   # Additional packages to be exlucded in the system image
+statements_files=[]  # Precompile statements files to be used, relative to the project folder
+execution_files=[] # Precompile execution files to be used, relative to the project folder
+```
+In this case I've excluded the `AbbreviatedStackTraces` package. Your `JuliaSysimage.toml` may look different. Notice that the names of the packages to be excluded must be in double quotes.
+
+By default VSCode is not configured to use compiled sysimages. You can set turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
 
 
 
@@ -167,7 +180,7 @@ beginner use generate, advanced use PkgTemplates.
 ### Finish setting up a custom sysimage
 Now let's finish setting up a custom sysimage. Recall that this step couldn't be completed until you had created  your first project. 
 
-To create a custom sysimage open the command palette and type `Tasks:Run Build Task`. Select the option (currently the only one) `Julia: Build sysimage for current environment (experimental)`. 
+To create a custom sysimage open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
 
 This will compile the files necessary to start your project into a single large file which will be loaded when you type using "YourProjectName" at the REPL. If your project has many dependencies this can reduce the load time for your project from minutes to seconds.
 
