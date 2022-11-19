@@ -7,13 +7,13 @@
 - [Efficient Programming Workflow in Julia](#efficient-programming-workflow-in-julia)
   - [Introduction](#introduction)
   - [Problems with Julia](#problems-with-julia)
-- [Set up your environment](#set-up-your-environment)
-  - [Get an account on Julia Discourse](#get-an-account-on-julia-discourse)
-  - [Install Julia](#install-julia)
-  - [Create a basic startup.jl file](#create-a-basic-startupjl-file)
-  - [Advanced setup.jl file](#advanced-setupjl-file)
+  - [Set up your environment](#set-up-your-environment)
+    - [Get an account on Julia Discourse](#get-an-account-on-julia-discourse)
+    - [Install Julia](#install-julia)
+    - [Create a basic startup.jl file](#create-a-basic-startupjl-file)
+    - [Advanced setup.jl file](#advanced-setupjl-file)
     - [Other startup packages to consider](#other-startup-packages-to-consider)
-  - [Install VSCode](#install-vscode)
+    - [Install VSCode](#install-vscode)
     - [Set `Auto-Save` to `onFocusChange`](#set-auto-save-to-onfocuschange)
     - [Set `Julia:Num Threads`](#set-julianum-threads)
     - [Create your first project](#create-your-first-project)
@@ -24,6 +24,7 @@
     - [For the REPL](#for-the-repl)
 
 <!-- /code_chunk_output -->
+
 
 ## Introduction
 Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
@@ -48,13 +49,13 @@ Finally, there are tips and tricks that are broadly useful but whose documentati
 
 You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.
 
-# Set up your environment
-## Get an account on Julia Discourse
+## Set up your environment
+### Get an account on Julia Discourse
 Don't skip this step in your eagerness to begin programming. Eventually you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
 
 Whether you are a beginner or an expert you should get an account on the Julia [discourse](https://discourse.julialang.org/) forum. The Julia community is friendly and helpful and you are likely to get an answer to your question within 24 hours. Read [this](https://discourse.julialang.org/t/please-read-make-it-easier-to-help-you/14757) before posting.
 
-## Install Julia
+### Install Julia
 You can install Julia manually but don't; instead install [juliaup](https://github.com/JuliaLang/juliaup) and then use `juliaup` to install Julia for you. Follow the instructions at the link to install juliaup.
 
 After you have installed `juliaup` open a command window and type:
@@ -80,7 +81,7 @@ julia>
 ```
 If the Julia REPL doesn't start or your prompt doesn't look anything like this go [here](https://github.com/JuliaLang/juliaup) for troubleshooting suggestions.
 
-## Create a basic startup.jl file
+### Create a basic startup.jl file
 Now that Julia is installed you should create a `startup.jl` file. The instructions in the `setup.jl` file will be executed at the beginning of every interactive Julia session and ensure that important packages are automatically loaded in your interactive REPL environment. 
 
 If you are a less experienced programmer the file you will create in this section is all you will need. More advanced programmers will want to also look at the Advanced setup.jl file section.
@@ -113,7 +114,7 @@ The OhMyREPL package enhances the REPL by adding support for context sensitive c
 
 If you are a beginner you won't need more packages in your `setup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
 
-## Advanced setup.jl file
+### Advanced setup.jl file
 This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github or have never benchmarked code you should skip this section.
 
 Create this `setup.jl` instead of the basic `startup.jl` file:
@@ -152,7 +153,7 @@ ENV["JULIA_EDITOR"] = "code.cmd"
 
 Don't add too many packages to your `startup.jl` file. Each package takes time to load and this overhead is incurred every time you start the REPL.
 
-## Install VSCode
+### Install VSCode
 This document assumes you will be using VSCode as your Julia IDE. It has the best support and features of the available IDE's. With VSCode installed you will rarely need to leave the IDE since the Julia language extension adds support for an interactive REPL panel, notebooks, and plotting.
 
 Install VSCode from here https://code.visualstudio.com/Download. Start VSCode and click on the extension manager. Type `julia` in the extension manager search window and install the Julia language extension.
