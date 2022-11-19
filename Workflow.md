@@ -154,11 +154,15 @@ By default VSCode starts Julia with 1 thread enabled. To automatically enable th
 ```
 
 ### Set `Julia:use an existing custom sysimage when starting the REPL`
-Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue, which it almost always is, then you should use a precompiled sysimages. This can be down with a script or, more conveniently, you can use the VSCode UI to do it interactively.
+Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. 
 
-Compiling a sysimage mostly works. Some packages however, won't compile into a sysimage. For example, AbbreviatedStackTraces has a `precompile=false` directive which the package compiler can't handle. `Plots` can also be troublesome. You'll have to find the packages which are causing precompilation to fail and tell the package compiler not to include them in the sysimage.
+You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue for you, which it almost always is, then you should use a precompiled sysimage.
 
-You do this by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/) which tells VSCode which packages to exclude. See the link for detailed instructions. 
+Sometimes compiling a sysimage doesn't work. A fix that frequently works is to update all your packages. To update your packages type `]` at the `julia` command prompt to enter the package manager and type `update`. Then try running the sysimage task again.
+
+If updating your packages didn't fix the problem you may have a package that won't compile into a sysimage. For example, AbbreviatedStackTraces has a `precompile=false` directive which the package compiler can't handle. Other packages have more obscure failures. You'll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail and then set up package compilation to not include them in the sysimage. 
+
+You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/). See the link for detailed instructions. 
 
 The contents of `JuliaSysimage.toml` will look like this:
 ```
@@ -169,9 +173,9 @@ execution_files=[] # Precompile execution files to be used, relative to the proj
 ```
 In this case I've excluded the `AbbreviatedStackTraces` package. Your `JuliaSysimage.toml` may look different. Notice that the names of the packages to be excluded must be in double quotes.
 
-By default VSCode is not configured to use compiled sysimages. You can set turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
+By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
 
-
+If you add a new package in the package editor your sysimage will not be automatically updated. Every time you add a package you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
 
 There is one more step to complete the custom sysimage setup, starting a `Task` that computes the sysimage. But this command palette option only is displayed for Julia projects and you don't have one of those yet. Once you've made your first project you can finish this step and compile the sysimage.
 
@@ -184,16 +188,11 @@ You don't need to understand what projects are or how they work until you become
 beginner use generate, advanced use PkgTemplates.
 
 ### Finish setting up a custom sysimage
-Now let's finish setting up a custom sysimage. Recall that this step couldn't be completed until you had created  your first project. 
+Now that you have a project defined you should finish setting up a custom sysimage. Recall that this step couldn't be completed until you had created your first project. 
 
 To create a custom sysimage open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
 
 This will compile the files necessary to start your project into a single large file which will be loaded when you type using "YourProjectName" at the REPL. If your project has many dependencies this can reduce the load time for your project from minutes to seconds.
-
-At times the sysimage compilation process will error. This usually happens because you have not updated your packages in a while. To update your packages type `]` at the `julia` command prompt to enter the package manager and type `update`. Then try running the sysimage task again.
-
-If you add a new package in the package editor your sysimage will not be automatically updated. Every time you add a package you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
-
 
 ## Tips and tricks
 ### For the REPL
