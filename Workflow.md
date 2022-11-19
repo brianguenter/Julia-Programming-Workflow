@@ -210,7 +210,7 @@ Now open a Julia REPL in VSCode. Open the command pallette (ctrl-shift-p) and ty
 Exit package manager mode by typing backspace and then type `using Package`. After your package loads type `first_plot()`. This should display a simple plot on a plot window in VSCode.
 
 ### Set `Julia:use an existing custom sysimage when starting the REPL`
-Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue for you, which it almost always is, then you should use a precompiled sysimage.
+Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue for you then you should use a precompiled sysimage.
 
 By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
 
