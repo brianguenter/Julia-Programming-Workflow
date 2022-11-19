@@ -236,7 +236,11 @@ Notice that the names of the packages to be excluded must be in double quotes.
 
 ## Tips and tricks
 ### For the REPL
-Type ? to enter help mode. Type `]` to enter package mode. Type `;` to enter shell mode.
+Starting from the `julia` prompt you can enter the different REPL modes by typing:
+* `?` help mode: get documentation on functions.
+* `]` package mode: add, remove, list, etc. packages to your project.
+* `;` shell mode: execute command line functions. Works in Linux but not in Windows.
+To exit any of these modes use backspace.
 
 Finding out how to type a symbol. Type ? at the REPL prompt to enter help mode then copy and paste the symbol into the REPL and hit enter:
 ```
