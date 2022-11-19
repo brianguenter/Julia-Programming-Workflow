@@ -265,4 +265,6 @@ Type F12 to go to a function definition.
 
 Type ctrl-shift-o to open a menu to search for a function definition by name.
 
+Place the cursor in a function or variable name you want to change and type F2. Enter the new name. This mostly works, but sometimes changes parts of the code it shouldn't. 
+
 Define go back and go forward keys. Open the keyboard shortcuts menu: File->Preferences->Keyboard Shortcuts. On my machines I define these to be alt-← for go back and alt-→ for go forward.
