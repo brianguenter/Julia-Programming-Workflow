@@ -6,7 +6,7 @@
 
 - [Efficient Programming Workflow in Julia](#efficient-programming-workflow-in-julia)
   - [Introduction](#introduction)
-  - [Problems with Julia](#problems-with-julia)
+  - [Beginner problems with Julia](#beginner-problems-with-julia)
   - [Set up your Julia environment](#set-up-your-julia-environment)
     - [Get an account on Julia Discourse](#get-an-account-on-julia-discourse)
     - [Install Julia](#install-julia)
@@ -36,7 +36,7 @@ This is not a tutorial on the Julia programming language. If that's what you wan
 
 An intermediate level of programming experience is necessary to follow these instructions. You should be comfortable working with command line interfaces. If you are an absolute beginner you may find it difficult to correctly carry out the instructions in this document. If you use Julia primarily as a scripting language, or you do all your work in Jupyter or Pluto notebooks then this document will be overkill for you.
 
-## Problems with Julia
+## Beginner problems with Julia
 
 Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, and perhaps unexpected, problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use several large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer. After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
