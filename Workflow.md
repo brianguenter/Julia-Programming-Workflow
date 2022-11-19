@@ -28,7 +28,7 @@
 ## Introduction
 Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
 
-Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then, as of late 2022, Julia largely delivers on this promise. Unfortunately, the default installation of Julia will not give you this experience.
+Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, the default installation of Julia will not give you this experience.
 
 Fortunately, with the proper system settings you can dramatically improve your programming workflow. This document will show you how to set up your programming environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
 
