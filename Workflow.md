@@ -20,6 +20,7 @@
     - [Add packages to your project](#add-packages-to-your-project)
     - [Set `Julia:use an existing custom sysimage when starting the REPL`](#set-juliause-an-existing-custom-sysimage-when-starting-the-repl)
     - [Finish setting up a custom sysimage](#finish-setting-up-a-custom-sysimage)
+  - [Code formatting rules](#code-formatting-rules)
   - [Tips and tricks](#tips-and-tricks)
     - [For the REPL](#for-the-repl)
 
@@ -234,6 +235,18 @@ execution_files=[] # Precompile execution files to be used, relative to the proj
 ```
 Notice that the names of the packages to be excluded must be in double quotes.
 
+## Code formatting rules
+
+Type functions as generically as possible. Some controversy but I have found that adding type information makes functions self documenting. Example:
+```
+multiply(a::Real,b::AbstractMatrix)
+```
+
+use `Real` if you want automatic differentiation a la `ForwardDiff` to work (dual numbers).
+
+Put export immediately after function definition. Another controversial position but I have found that if the exports are clustered at the top of the main file then as you change function names or delete functions it is very easy to forget to update this list. Then if you type names(YourModuleName) it will show exported names that have no definition in your module. 
+
+If the export statement is immediately after the function then if you delete the function.People can always find the formal API of exported names by typeing names(YourModuleName) regardless of where the export statement are.
 ## Tips and tricks
 ### For the REPL
 Starting from the `julia` prompt you can enter the different REPL modes by typing:
