@@ -15,17 +15,15 @@ An intermediate level of programming experience is necessary to follow these ins
 
 The biggest, most annoying, and perhaps unexpected problem beginners encounter is long startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. 
 
-If your project use several large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses *many* packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
+If your project use several large packages, for example those related to plotting, it can take a long time to load the packages *every* time you start a new REPL session. A package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses *many* packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
-The fundamental cause of this delay is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
+The fundamental cause of this delay is that the current Julia compilation system does not cache all the compiled code generated when you first load a package. Code may be unnecessarily recompiled every time you start a new REPL session, even when the source code of the package hasn't changed.
 
-Startup latency has steadily declined over the last several years, and is likely to decline further soon. But for now it's a problem you have to work around.
+This startup latency has steadily declined over the last several years, and is likely to decline further soon. But for now it's a problem you have to work around.
 
 Another common beginner problem is figuring out how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.
 
 Finally, there are tips and tricks that are broadly useful but whose documentation is scattered and difficult to find. The last section of the document has short descriptions of several. 
-
-
 
 ## Set up your Julia environment
 You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.
