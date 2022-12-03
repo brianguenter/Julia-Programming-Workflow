@@ -281,9 +281,9 @@ By convention the user accessible API of a module is assumed to consist of only 
 julia> module ExportExample
        export f1
        
-       f1 = println("f1")
+       f1(x) = println("f1")
        
-       f2 = println("f2")
+       f2(x) = println("f2")
        export f2
        end
 ```
@@ -300,7 +300,7 @@ Most Julia style guides recommend you put all exported names at the top of the f
 julia> module ExportExample
        export f1
        
-       f2 = println("f2")
+       f2(x) = println("f2")
        export f2
        end
 WARNING: replacing module ExportExample.
@@ -328,7 +328,9 @@ ERROR: UndefVarError: f1 not defined
 ```
 The compiler blithely compiled module `M2` without even a warning about the undefined `f1`. The error doesn't occur until you *execute* `f3`. This can be a big problem in a larger project with several modules. You delete a function or change its name in one module and assume everything is fine because everything compiles. Then a month later you execute some rarely used function in a different module and you see this `not defined` error, which you will waste considerable time tracking down (again, ask me how I know).
 
-These sorts of errors are usually caught by a test suite as part of a continuous integeration methodology. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
+If you put the export statement immediately after definitions then you are much less likely to forget to update uopur exports when you make changes because you will see the export statement as you edit the code.
+
+These export errors are usually caught by a test suite as part of a continuous integeration methodology. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
 ## Tips and tricks
 This last section is a grab bag of commands that you may find useful.
 ### For the REPL
