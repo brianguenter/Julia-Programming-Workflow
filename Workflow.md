@@ -326,7 +326,7 @@ ERROR: UndefVarError: f1 not defined
 ```
 The compiler blithely compiled module `M2` without even a warning about the undefined `f1`. The error doesn't occur until you *execute* `f3`. This can be a big problem in a larger project with several modules. You delete a function or change its name in one module and assume everything is fine because everything compiles. Then a month later you execute some rarely used function in a different module and you see this `not defined` error, which you will waste considerable time tracking down (again, ask me how I know).
 
-If you put the export statement immediately after definitions then you are much less likely to forget to update uopur exports when you make changes because you will see the export statement as you edit the code.
+If you put the `export` statement immediately after a definition then you are much less likely to forget to update it because the `export` statement will be right in front of your eyes when you edit the code.
 
 These export errors are usually caught by a test suite as part of a continuous integeration methodology. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
 ## Tips and tricks
