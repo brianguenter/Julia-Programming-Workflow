@@ -234,7 +234,7 @@ using Symbolics
  include("setup.jl")
 ```
 
-## Code formatting rules
+## Code formatting suggestions
 ### Type function arguments as generically as possible
 It is not necessary to type function arguments in Julia. The compiler will figure out the types automatically. However it can make your code easier to read. If you decide to type function arguments do so as generically as possible. Example:
 ```
@@ -276,9 +276,7 @@ julia> subtypes(Real)
 ```
 ### Put export statements immediately after function definitions
 
-Function should be exported from the modules they are defined in. While it is possible for a user of your module to access any function it is assumed that exported functions constitute the supported API.
-
-You can put the export statment anywhere in your module code:
+By convention the user accessible API of a module is assumed to consist of only those names which are exported from the module. All other names are assumed to be internal functions which can change at any time. You export names from a module using the `export` statement which can be placed anywhere in your module code:
 ```
 julia> module ExportExample
        export f1
@@ -289,7 +287,7 @@ julia> module ExportExample
        export f2
        end
 ```
-You can see which functions, variables, etc., are exported with the `names` function:
+You can see which functions, variables, etc., are exported from a module with the `names` function:
 ```
 julia> names(ExportExample)
 3-element Vector{Symbol}:
@@ -332,7 +330,7 @@ The compiler blithely compiled module `M2` without even a warning about the unde
 
 These sorts of errors are usually caught by a test suite as part of a continuous integeration methodology. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
 ## Tips and tricks
-This last section is a grab bag of functions, modes, and user settings that you may find useful.
+This last section is a grab bag of commands that you may find useful.
 ### For the REPL
 Starting from the `julia` prompt you can enter the different REPL modes by typing:
 * `?` help mode: get documentation on functions.
