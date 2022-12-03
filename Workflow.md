@@ -1,39 +1,11 @@
 # Efficient VSCode Workflow in Julia
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
-- [Efficient VSCode Workflow in Julia](#efficient-vscode-workflow-in-julia)
-  - [Introduction](#introduction)
-  - [Beginner problems with Julia](#beginner-problems-with-julia)
-  - [Set up your Julia environment](#set-up-your-julia-environment)
-    - [Get an account on Julia Discourse](#get-an-account-on-julia-discourse)
-    - [Install Julia](#install-julia)
-    - [Create a basic startup.jl file](#create-a-basic-startupjl-file)
-    - [Advanced setup.jl file](#advanced-setupjl-file)
-    - [Other startup packages to consider](#other-startup-packages-to-consider)
-  - [Set up VSCode](#set-up-vscode)
-    - [Set `Auto-Save` to `onFocusChange`](#set-auto-save-to-onfocuschange)
-    - [Set `Julia:Num Threads`](#set-julianum-threads)
-    - [Create your first project](#create-your-first-project)
-    - [Add packages to your project](#add-packages-to-your-project)
-    - [Set `Julia:use an existing custom sysimage when starting the REPL`](#set-juliause-an-existing-custom-sysimage-when-starting-the-repl)
-    - [Finish setting up a custom sysimage](#finish-setting-up-a-custom-sysimage)
-  - [Code formatting rules](#code-formatting-rules)
-  - [Tips and tricks](#tips-and-tricks)
-    - [For the REPL](#for-the-repl)
-
-<!-- /code_chunk_output -->
-
-
-
 ## Introduction
 Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
 
-Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, the default installation of Julia will not give you this experience.
+Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, some of the default environment settings do not lead to the most efficient and glitch free workflow.
 
-Fortunately, using VSCode with the proper system settings can dramatically improve your programming workflow. This document will show you how to set up your VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
+This document will show you how to set up your Julia and VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
 
 This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead. 
 
@@ -41,7 +13,9 @@ An intermediate level of programming experience is necessary to follow these ins
 
 ## Beginner problems with Julia
 
-Beginning Julia programmers have difficulty with a small set of problems that are more or less unique to Julia. The biggest, most annoying, and perhaps unexpected problem is startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. If your project use several large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer. After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
+The biggest, most annoying, and perhaps unexpected problem beginners encounter is long startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. 
+
+If your project use several large packages, especially those related to plotting, it can take a minute or more to load these packages every time you start a new REPL session. For example, a package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses *many* packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
 The fundamental cause of this delay is that Julia is a compiled language, with compilation delayed until what would normally be considered run time in most compiled languages. The current Julia compilation system does not cache all the information generated during compilation. Consequently, code may be unnecessarily recompiled every time you start a new REPL session, even when the source code hasn't changed.
 
@@ -237,6 +211,29 @@ execution_files=[] # Precompile execution files to be used, relative to the proj
 ```
 Notice that the names of the packages to be excluded must be in double quotes.
 
+### Starting your project efficiently
+Before you can begin using or debugging the code in your project you may have to load packages, define test functions and variables, etc., at the REPL. During the development phase of your code you may be restarting the REPL many times per day as you make changes that Revise can't track, or if your REPL state becomes corrupted. When this happens typing these setup commands repeatedly can be tiresome. 
+
+You can save time by creating a file, let's call it `setup.jl` that contains all these commands. You load and execute them using the Julia `include` function. Typically this setup file is only used during development. It is not meant to be included in a released package. 
+
+Here's an example `setup.jl` file:
+
+```
+# This script is for setting up the REPL environment for development of the Differentation package. No use in production.
+
+using Differentiation
+using Differentiation.Experiments
+using Differentiation.SphericalHarmonics
+
+using Symbolics
+
+@variables x y
+```
+
+ which you execute by typing the following command at the REPL
+ ```
+ include("setup.jl")
+```
 ## Code formatting rules
 
 Type functions as generically as possible. Some controversy but I have found that adding type information makes functions self documenting. Example:
@@ -254,7 +251,7 @@ If the export statement is immediately after the function then if you delete the
 Starting from the `julia` prompt you can enter the different REPL modes by typing:
 * `?` help mode: get documentation on functions.
 * `]` package mode: add, remove, list, etc. packages to your project.
-* `;` shell mode: execute command line functions. Works in Linux but not in Windows.
+* `;` shell mode: execute command line functions. This mode works in Linux but not in Windows.
 To exit any of these modes use backspace.
 
 Finding out how to type a symbol. Type ? at the REPL prompt to enter help mode then copy and paste the symbol into the REPL and hit enter:
@@ -281,5 +278,3 @@ Type F12 to go to a function definition.
 Type ctrl-shift-o to open a menu to search for a function definition by name.
 
 Refactoring code. Place the cursor in a function or variable name you want to change and type F2. Enter the new name. This mostly works, but sometimes changes parts of the code it shouldn't. 
-
-Define go back and go forward keys. Open the keyboard shortcuts menu: File->Preferences->Keyboard Shortcuts. On my machines I define these to be alt-← for go back and alt-→ for go forward.
