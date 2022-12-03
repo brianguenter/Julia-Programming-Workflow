@@ -25,9 +25,10 @@ Another common beginner problem is figuring out how to organize your code so tha
 
 Finally, there are tips and tricks that are broadly useful but whose documentation is scattered and difficult to find. The last section of the document has short descriptions of several. 
 
-You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.
+
 
 ## Set up your Julia environment
+You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.
 ### Get an account on Julia Discourse
 Don't skip this step in your eagerness to begin programming. Eventually you will hit a problem this guide won't help you fix. When this happens Julia Discourse is the place to go for answers.
 
@@ -60,7 +61,7 @@ julia>
 If the Julia REPL doesn't start or your prompt doesn't look anything like this go [here](https://github.com/JuliaLang/juliaup) for troubleshooting suggestions.
 
 ### Create a basic startup.jl file
-Now that Julia is installed you should create a `startup.jl` file. The instructions in the `setup.jl` file will be executed at the beginning of every interactive Julia session and ensure that important packages are automatically loaded in your interactive REPL environment. 
+Now that Julia is installed you should create a `startup.jl` file. The instructions in the `startup.jl` file will be executed at the beginning of every interactive Julia session and ensure that important packages are automatically loaded in your interactive REPL environment. 
 
 If you are a less experienced programmer the file you will create in this section is all you will need. More advanced programmers will want to also look at the Advanced setup.jl file section.
 
@@ -90,9 +91,9 @@ This will automatically load the packages Revise and OhMyREPL every time you sta
 
 The OhMyREPL package enhances the REPL by adding support for context sensitive color text and color parenthesis matching. This makes it is easier to write and edit code at the REPL.
 
-If you are a beginner you won't need more packages in your `setup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
+If you are a beginner you won't need more packages in your `startup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
 
-### Advanced setup.jl file
+### Advanced startup.jl file
 This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github or have never benchmarked code you should skip this section.
 
 Create this `setup.jl` instead of the basic `startup.jl` file:
@@ -191,16 +192,13 @@ Some packages, such as Plots, take a long time to load. If your project uses sev
 
 By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing `Preferences:Open Settings (UI)`. Then type `julia:use custom sysimage` in the settings search bar. Select the box `use an existing custom sysimage when starting the REPL`. This will make VSCode use a custom sysimage if one is available.
 
-If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contains the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
+Now you need to compile the sysimage. Open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. This will compile the files necessary to start your project into a single large file which will be loaded at startup time.
 
-### Finish setting up a custom sysimage
-So far you've told VSCode you want to use a custom sysimage. Now you need to compile the sysimage. Open the command palette and type `Tasks:Run Build Task`. Select the option `Julia: Build sysimage for current environment (experimental)`. 
-
-This will compile the files necessary to start your project into a single large file which will be loaded at startup time. If your project has many dependencies this can reduce the load time for your project from a minute or more to a fraction of a second.
+If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contain the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun `Tasks:Run Build Task`, `Julia: build custom sysimage for current (experimental)`.
 
 Sometimes compiling a sysimage doesn't work. A fix that frequently works is to update all your packages. To update your packages type `]` at the `julia` command prompt to enter the package manager and type `update`. Then try running the sysimage task again.
 
-If updating your packages didn't fix the problem you may have a package that won't compile into a sysimage. You'll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail. You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml` [file](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/). See the link for detailed instructions. 
+If updating your packages didn't fix the problem you may have a package that won't compile into a sysimage. You'll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail. You can tell VSCode which packages to exclude by creating a `JuliaSysimage.toml` file. See this [link](https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/) for detailed instructions. 
 
 The contents of `JuliaSysimage.toml` will look like this:
 ```
@@ -212,9 +210,9 @@ execution_files=[] # Precompile execution files to be used, relative to the proj
 Notice that the names of the packages to be excluded must be in double quotes.
 
 ### Starting your project efficiently
-Before you can begin using or debugging the code in your project you may have to load packages, define test functions and variables, etc., at the REPL. During the development phase of your code you may be restarting the REPL many times per day as you make changes that Revise can't track, or if your REPL state becomes corrupted. When this happens typing these setup commands repeatedly can be tiresome. 
+Before you can begin using or debugging the code in your project you may have to load packages, define test functions and variables, etc., at the REPL. During the development phase of your code you may be restarting the REPL many times per day as you make changes that Revise can't track, or if your REPL state becomes corrupted. When this happens typing setup commands repeatedly can be tiresome. 
 
-You can save time by creating a file, let's call it `setup.jl` that contains all these commands. You load and execute them using the Julia `include` function. Typically this setup file is only used during development. It is not meant to be included in a released package. 
+You can save time by creating a file, let's call it `setup.jl`, that contains all these commands and loading the file at the beginning of each programming session using the Julia `include` function. Place this file in the root directory of your project. Typically this setup file is only used during development. It is not meant to be included in a released package. 
 
 Here's an example `setup.jl` file:
 
@@ -231,22 +229,110 @@ using Symbolics
 ```
 
  which you execute by typing the following command at the REPL
- ```
+
+```
  include("setup.jl")
 ```
-## Code formatting rules
 
-Type functions as generically as possible. Some controversy but I have found that adding type information makes functions self documenting. Example:
+## Code formatting rules
+### Type function arguments as generically as possible
+It is not necessary to type function arguments in Julia. The compiler will figure out the types automatically. However it can make your code easier to read. If you decide to type function arguments do so as generically as possible. Example:
 ```
+multiply(a::Number,b::AbstractMatrix)
+```
+
+Here `Number` is used instead of `Real` because it is more generic:
+```
+julia> subtypes(Number)  #subtypes, and supertype, are defined in the InteractiveUtils package. This is loaded by default in the Main module of the REPL. If you want to call it from your code you will need a using InteractiveUtils statement at the top level of your module.
+4-element Vector{Any}:
+ Complex
+ DualNumbers.Dual
+ Real
+ Static.StaticInteger
+ ```
+ 
+ If you know that `a` will always be a `Real` then you could type it like this:
+ ```
 multiply(a::Real,b::AbstractMatrix)
 ```
+You might think that even `Real` is too generic since perhaps you expect `a` to always be `AbstractFloat` or even `Float64`. If you intend to use automatic differentiation on this function then you should stick with the more generic `Real`. This is because `ForwardDiff.Dual` inherits from `Real`. The dual numbers defined in `ForwardDiff` are used in automatic differentiation:
 
-use `Real` if you want automatic differentiation a la `ForwardDiff` to work (dual numbers).
+```
+julia> subtypes(Real)
+12-element Vector{Any}:
+ AbstractFloat
+ AbstractIrrational
+ FixedPointNumbers.FixedPoint
+ ForwardDiff.Dual
+ Integer
+ Rational
+ Static.StaticFloat64
+ StatsBase.PValue
+ StatsBase.TestStat
+ SymbolicUtils.LiteralReal
+ SymbolicUtils.SafeReal
+ Symbolics.Num
 
-Put export immediately after function definition. Another controversial position but I have found that if the exports are clustered at the top of the main file then as you change function names or delete functions it is very easy to forget to update this list. Then if you type names(YourModuleName) it will show exported names that have no definition in your module. 
+```
+### Put export statements immediately after function definitions
 
-If the export statement is immediately after the function then if you delete the function.People can always find the formal API of exported names by typeing names(YourModuleName) regardless of where the export statement are.
+Function should be exported from the modules they are defined in. While it is possible for a user of your module to access any function it is assumed that exported functions constitute the supported API.
+
+You can put the export statment anywhere in your module code:
+```
+julia> module ExportExample
+       export f1
+       
+       f1 = println("f1")
+       
+       f2 = println("f2")
+       export f2
+       end
+```
+You can see which functions, variables, etc., are exported with the `names` function:
+```
+julia> names(ExportExample)
+3-element Vector{Symbol}:
+ :ExportExample
+ :f1
+ :f2
+```
+Most Julia style guides recommend you put all exported names at the top of the file. I recommend you don't, at least not until you become a more experienced Julia programmer. Here's why. Suppose you delete function `f1`. If `f1` is defined at the bottom of a long file you won't see the `export f1` statement at the top. And it is likely you'll forget to remove `f1` from the export list (ask me how I know). What happens then?
+```
+julia> module ExportExample
+       export f1
+       
+       f2 = println("f2")
+       export f2
+       end
+WARNING: replacing module ExportExample.
+```
+Notice that `f1` is still exported even though it is no longer defined in `ExportExample`:
+```
+julia> names(ExportExample)
+3-element Vector{Symbol}:
+ :ExportExample
+ :f1
+ :f2
+ ```
+ The compiler won't complain if you export an undefined name. Why is this a problem? Lets suppose we have another module `M2` that uses `ExportExample`:
+ ```
+ julia> module M2
+       using Main.ExportExample
+       f3(x) = f1(x)
+       export f3
+       end
+
+julia> using Main.M2
+
+julia> f3(1)
+ERROR: UndefVarError: f1 not defined
+```
+The compiler blithely compiled module `M2` without even a warning about the undefined `f1`. The error doesn't occur until you *execute* `f3`. This can be a big problem in a larger project with several modules. You delete a function or change its name in one module and assume everything is fine because everything compiles. Then a month later you execute some rarely used function in a different module and you see this `not defined` error, which you will waste considerable time tracking down (again, ask me how I know).
+
+These sorts of errors are usually caught by a test suite as part of a continuous integeration methodology. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
 ## Tips and tricks
+This last section is a grab bag of functions, modes, and user settings that you may find useful.
 ### For the REPL
 Starting from the `julia` prompt you can enter the different REPL modes by typing:
 * `?` help mode: get documentation on functions.
