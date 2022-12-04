@@ -257,7 +257,7 @@ julia> subtypes(Number)  #subtypes, and supertype, are defined in the Interactiv
  ```
 multiply(a::Real,b::AbstractMatrix)
 ```
-You might think that even `Real` is too generic since perhaps you expect `a` to always be `AbstractFloat` or even `Float64`. If you intend to use automatic differentiation on this function then you should stick with the more generic `Real`. This is because `ForwardDiff.Dual` inherits from `Real`. The dual numbers defined in `ForwardDiff` are used in automatic differentiation:
+You might think that even `Real` is too generic since perhaps you expect `a` to always be `AbstractFloat` or even `Float64`. However, if you intend to use automatic differentiation on this function then you should stick with the more generic `Real`. This is because `ForwardDiff.Dual` inherits from `Real`. The dual numbers defined in `ForwardDiff` are used in automatic differentiation:
 
 ```
 julia> subtypes(Real)
