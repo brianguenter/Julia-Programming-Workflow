@@ -278,7 +278,7 @@ julia> subtypes(Real)
 ```
 ### Put export statements immediately after function definitions
 
-By convention the user accessible API of a module is assumed to consist of only those names which are exported from the module. All other names are assumed to be internal functions which can change at any time. You export names from a module using the `export` statement which can be placed anywhere in your module code:
+By convention the user accessible API of a module is assumed to consist of only those names which are exported from the module. All other names are assumed to be unsupported internal functions. You export names from a module using the `export` statement. This can be placed anywhere in your module code:
 ```
 julia> module ExportExample
        export f1
@@ -297,7 +297,7 @@ julia> names(ExportExample)
  :f1
  :f2
 ```
-Most Julia style guides recommend you put all exported names at the top of the file. I recommend you don't, at least not until you become a more experienced Julia programmer. Here's why. Suppose you delete function `f1`. If `f1` is defined at the bottom of a long file you won't see the `export f1` statement at the top. And it is likely you'll forget to remove `f1` from the export list (ask me how I know). What happens then?
+Most Julia style guides recommend you put all exported names at the top of the file. I recommend you don't, at least not until you become a more experienced Julia programmer and maybe not even then. Here's why. Suppose you delete function `f1`. If `f1` is defined at the bottom of a long file you won't see the `export f1` statement at the top. And it is likely you'll forget to remove `f1` from the export list (ask me how I know). What happens then?
 ```
 julia> module ExportExample
        export f1
@@ -342,12 +342,14 @@ Starting from the `julia` prompt you can enter the different REPL modes by typin
 * `;` shell mode: execute command line functions. This mode works in Linux but not in Windows.
 To exit any of these modes use backspace.
 
-Finding out how to type a symbol. Type ? at the REPL prompt to enter help mode then copy and paste the symbol into the REPL and hit enter:
+
+
+You see a cool symbol in another person's Julia code and want to use it. How do you type it? One way is to find the symbol on this web [page](https://docs.julialang.org/en/v1/manual/unicode-input/) which lists all the Unicode symbols you can use tab completion to type. Another is to copy the symbol then enter help mode by typing ? at the REPL prompt. Paste the symbol into the REPL and hit enter:
 ```
 help?> ∢
 "∢" can be typed by \sphericalangle<tab>
 ```
-Creating a new line in an existing function definition in the REPL. Suppose you have this function and want to add a line after `y=sqrt(x)`
+Suppose you have already typed this function and want to add a line after `y=sqrt(x)`
 ```
 julia> function f(x)
        y = sqrt(x)
