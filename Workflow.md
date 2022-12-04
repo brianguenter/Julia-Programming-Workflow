@@ -344,7 +344,7 @@ To exit any of these modes use backspace.
 
 
 
-You see a cool symbol in another person's Julia code and want to use it. How do you type it? One way is to find the symbol on this web [page](https://docs.julialang.org/en/v1/manual/unicode-input/) which lists all the Unicode symbols you can use tab completion to type. Another is to copy the symbol then enter help mode by typing ? at the REPL prompt. Paste the symbol into the REPL and hit enter:
+You see a cool symbol ∢ in another person's Julia code and want to use it. How do you type it with tab completion? One way is to find the symbol on this web [page](https://docs.julialang.org/en/v1/manual/unicode-input/) which lists all the Unicode symbols you can use tab completion to type. Another is to copy the symbol then enter help mode by typing ? at the REPL prompt. Paste the symbol into the REPL and hit enter:
 ```
 help?> ∢
 "∢" can be typed by \sphericalangle<tab>
