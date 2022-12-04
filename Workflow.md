@@ -332,7 +332,7 @@ The compiler blithely compiled module `M2` without even a warning about the unde
 
 If you put the `export` statement immediately after a definition then you are much less likely to forget to update it because the `export` statement will be right in front of your eyes when you edit the code.
 
-These export errors are usually caught by a test suite as part of a continuous integeration methodology. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
+These export errors are usually caught by a test suite as part of a continuous integeration methodology, if you are vigilant about writing tests and have good test coverage. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
 ## Tips and tricks
 This last section is a grab bag of commands that you may find useful.
 ### For the REPL
