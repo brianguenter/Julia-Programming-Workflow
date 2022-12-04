@@ -1,11 +1,11 @@
 # Efficient VSCode Workflow in Julia
 
 ## Introduction
-Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
+Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. Keeping the two versions of the same program in sync is a significant software engineering challenge. And, it's more difficult to learn and program in two languages than in one.
 
 Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, some of the default environment settings do not lead to the most efficient and glitch free workflow. Most of the settings and features for efficient workflow are documented, somewhere, but it's hard to find a single document that includes all the information you need to set up your environment properly.
 
-This document is an attempt to address this problem. It will show you how to set up your Julia and VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
+This document is an attempt to address this issue. It will show you how to set up your Julia and VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
 
 This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead. 
 
@@ -15,7 +15,7 @@ An intermediate level of programming experience is necessary to follow these ins
 
 The biggest, most annoying, and perhaps unexpected problem beginners encounter is long startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. 
 
-If your project use several large packages, for example those related to plotting, it can take a long time to load the packages *every* time you start a new REPL session. A package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses *many* packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
+If your project use several large packages it can take a long time to load the packages *every* time you start a new REPL session. A package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses *many* packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
 The fundamental cause of this delay is that the current Julia compilation system does not cache all the compiled code generated when you first load a package. Code may be unnecessarily recompiled every time you start a new REPL session, even when the source code of the package hasn't changed.
 
