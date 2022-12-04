@@ -3,9 +3,9 @@
 ## Introduction
 Julia is a programming language designed to solve the "two language problem". This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. 
 
-Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, some of the default environment settings do not lead to the most efficient and glitch free workflow.
+Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, some of the default environment settings do not lead to the most efficient and glitch free workflow. Most of the settings and features for efficient workflow are documented, somewhere, but it's hard to find a single document that includes all the information you need to set up your environment for efficient workflow.
 
-This document will show you how to set up your Julia and VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
+This document is an attempt to address this problem. It will show you how to set up your Julia and VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.
 
 This is not a tutorial on the Julia programming language. If that's what you want look [here](https://julialang.org/learning/tutorials/) instead. 
 
