@@ -181,7 +181,11 @@ export first_plot
 end #module
 ```
 
-Now open a Julia REPL in VSCode. Open the command pallette (ctrl-shift-p) and type `Julia: Start REPL`. In the REPL type `]` to enter package manager mode. Type `add Plots` and hit enter. The package manager will download the `Plots` package from the Julia registry so your program will be able to find it when you execute the first_plot function.
+Now open a Julia REPL in VSCode. Open the command pallette (ctrl-shift-p) and type `Julia: Start REPL`. In the REPL type `]` to enter package manager mode. 
+
+Verify that the prompt has changed to `Package1:`. If it hasn't then type `activate Package1`. This will tell the REPL where to look for the source code of your package. You can also type `activate .` to activate the package in the current directory, which is this case will be `Package1`.
+
+Type `add Plots` and hit enter. The package manager will download the `Plots` package from the Julia registry so your program will be able to find it when you execute the first_plot function.
 
 Exit package manager mode by typing backspace and then type `using Package1`. After your package loads type `first_plot()`. This should display a simple plot on a plot window in VSCode.
 
