@@ -89,7 +89,7 @@ This will automatically load the packages Revise and OhMyREPL every time you sta
 
 The OhMyREPL package enhances the REPL by adding support for context sensitive color text and color parenthesis matching. This makes it is easier to write and edit code at the REPL.
 
-If you are a beginner you won't need more packages in your `startup.jl` file until you have much more experience with the language. You can skip the next section and go to the Install VSCode section.
+If you are a beginner you won't need more packages in your `startup.jl` file until you have much more experience with the language. You can skip the next section and go to the Set up VSCode section.
 
 ### Advanced startup.jl file
 This `startup.jl` file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github or have never benchmarked code you should skip this section.
