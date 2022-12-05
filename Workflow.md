@@ -1,3 +1,4 @@
+Trivial
 # Efficient VSCode Workflow in Julia
 
 ## Introduction
