@@ -369,3 +369,32 @@ Type F12 to go to a function definition.
 Type ctrl-shift-o to open a menu to search for a function definition by name.
 
 Refactoring code. Place the cursor in a function or variable name you want to change and type F2. Enter the new name. This mostly works, but sometimes changes parts of the code it shouldn't. 
+
+
+# Appendix
+
+## Gotchas
+
+```
+julia> f(a::Vector{Integer}) = sum(a)
+f (generic function with 2 methods)
+
+julia> f([1,2,3])
+ERROR: MethodError: no method matching (::Colon)(::Int64, ::Vector{Int64})
+Closest candidates are:
+  (::Colon)(::T, ::Any, ::T) where T<:Real at range.jl:41
+  (::Colon)(::A, ::Any, ::C) where {A<:Real, C<:Real} at range.jl:10
+  (::Colon)(::T, ::Any, ::T) where T at range.jl:40
+  ...
+Stacktrace:
+ [1] f(n::Vector{Int64})
+   @ Main .\REPL[2]:1
+ [2] top-level scope
+   @ REPL[6]:1
+
+julia> f(a::Vector{T}) where{T<:Integer} = sum(a)
+f (generic function with 3 methods)
+
+julia> f([1,2,3])
+6
+```
