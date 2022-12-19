@@ -238,8 +238,26 @@ using Symbolics
 ```
 
 ## Code formatting suggestions
+### Autoformat on Save
+If you are not using git and github this is less important. But if you are, especially if several people are working on the same project, then formatting your files every time they are saved will prevent small formatting changes from showing up as diffs that will create many trivial git commits. 
+
+First set up the Julia formatter: in VSCode type `ctrl-shift-p`, select `Preferences:open settings (UI)`, then type `julia format` in the search box. In the dropdown menu for `Editor:default formatter` select `Julia:julialang.language-julia`. 
+
+Now set up format on auto save: type `ctrl-shift-p`, select `Preferences:open settings (UI)`, then type `Editor:format on save` in the search box. Click the check box for the option to format on save. 
+
+Now your files will automatically be formatted consistently before they are committed.
 ### Type function arguments as generically as possible
-It is not necessary to type function arguments in Julia. The compiler will figure out the types automatically. However it can make your code easier to read. If you decide to type function arguments do so as generically as possible. Example:
+It is not necessary to type function arguments in Julia. The compiler will figure out the types automatically making it easy to write very generic code. However not all code is generic; sometimes only a few types make sense as arguments. In these cases adding types to the function declaration makes your code easier to read and use. For example, if this function is part of the official API of a package you are using:
+```
+transform(obj,mat)
+```
+what is obj, or mat? You could document this or you could add types which will automatically document it for you:
+```
+transform(obj::Geometry,transform::SMatrix{3,4}).
+```
+In VSCode these types will show up when you hover your mouse over the function call.
+
+ If you decide to type function arguments do so as generically as possible. Example:
 ```
 multiply(a::Number,b::AbstractMatrix)
 ```
@@ -329,17 +347,19 @@ julia> using Main.M2
 julia> f3(1)
 ERROR: UndefVarError: f1 not defined
 ```
-The compiler blithely compiled module `M2` without even a warning about the undefined `f1`. The error doesn't occur until you *execute* `f3`. This can be a big problem in a larger project with several modules. You delete a function or change its name in one module and assume everything is fine because everything compiles. Then a month later you execute some rarely used function in a different module and you see this `not defined` error, which you will waste considerable time tracking down (again, ask me how I know).
+The compiler blithely compiled module `M2` without even a warning about the undefined `f1`. The error doesn't occur until you *execute* `f3` which then calls the undefined function `f1`. 
+
+This can be a big problem in a larger project with several modules. You delete a function or change its name in one module and assume everything is fine because everything compiles. Then a month later you execute some rarely used function in a different module and you see this `not defined` error, which you will waste considerable time tracking down (again, ask me how I know).
 
 If you put the `export` statement immediately after a definition then you are much less likely to forget to update it because the `export` statement will be right in front of your eyes when you edit the code.
 
-These export errors are usually caught by a test suite as part of a continuous integeration methodology, if you are vigilant about writing tests and have good test coverage. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
+These export errors are usually caught by a test suite as part of a continuous integeration methodology, *if* you are vigilant about writing tests and have good test coverage. But when you are just starting Julia you probably don't have this machinery set up. Until you do put export statements immediately after definitions.
 ## Tips and tricks
 This last section is a grab bag of commands that you may find useful.
 ### For the REPL
 Starting from the `julia` prompt you can enter the different REPL modes by typing:
-* `?` help mode: get documentation on functions.
-* `]` package mode: add, remove, list, etc. packages to your project.
+* `?` help mode: get documentation on functions and find out what tab sequence generates a character.
+* `]` package mode: add, remove, list, update, etc. packages for your project.
 * `;` shell mode: execute command line functions. This mode works in Linux but not in Windows.
 To exit any of these modes use backspace.
 
@@ -363,18 +383,19 @@ function f(x)
        return (y,x) #use alt-enter to create a new line here
        end
  ```
+
+ Need to see a compiler error message again? Type Revise.retry(). This will trigger Revise to reevaluate your functions. Doesn't always give as full an error message as killing the REPL and starting again but it is faster than reloading your enviroment from scratch.
 ### For VSCode
 Type F12 to go to a function definition.
 
 Type ctrl-shift-o to open a menu to search for a function definition by name.
 
-Refactoring code. Place the cursor in a function or variable name you want to change and type F2. Enter the new name. This mostly works, but sometimes changes parts of the code it shouldn't. 
+Refactoring code. Place the cursor in a function or variable name you want to change and type F2. Enter the new name. This mostly works in Julia, but sometimes changes parts of the code it shouldn't. 
 
 
 # Appendix
 
 ## Gotchas
-
 ```
 julia> f(a::Vector{Integer}) = sum(a)
 f (generic function with 2 methods)
