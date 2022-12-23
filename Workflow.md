@@ -325,7 +325,9 @@ First set up the Julia formatter: in VSCode type `ctrl-shift-p`, select `Prefere
 
 Now set up format on auto save: type `ctrl-shift-p`, select `Preferences:open settings (UI)`, then type `Editor:format on save` in the search box. Click the check box for the option to format on save. 
 
-Now your files will automatically be formatted consistently before they are committed.
+Now your files will automatically be formatted consistently before they are committed. As long as everyone working on the project with you is using the same formatting your files will all be consistent. You can also enforce consistent formatting using git pre-commit hooks but that is more complicated and not for beginners.
+
+If you hate the formatting defaults this might be a good time to take that mindfulness meditation course you've been thinking about.
 ### Type function arguments as generically as possible
 It is not necessary to type function arguments in Julia. The compiler will figure out the types automatically making it easy to write very generic code. However not all code is generic; sometimes only a few types make sense as arguments. In these cases adding types to the function declaration makes your code easier to read and use. For example, if this function is part of the official API of a package you are using:
 ```
