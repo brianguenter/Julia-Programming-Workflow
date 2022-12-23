@@ -33,6 +33,86 @@ Don't skip this step in your eagerness to begin programming. Eventually you will
 
 Whether you are a beginner or an expert you should get an account on the Julia [discourse](https://discourse.julialang.org/) forum. The Julia community is friendly and helpful and you are likely to get an answer to your question within 24 hours. Read [this](https://discourse.julialang.org/t/please-read-make-it-easier-to-help-you/14757) before posting.
 
+Here are tips for posting to maximize the chance of someone answering your question. Whenever possible post a complete working piece of code that others can copy and paste into the REPL and execute. This will greatly increase the odds of you getting help. When you include code in the markdown text of your post enclose it within ``` ```. This will make the code format better. 
+
+The simplest way to create a posting is to copy and paste the full output of the REPL including the entire error message. To copy at the REPL you need to use ctrl-shift-c rather than ctrl-c. Similary to paste into the REPL you need to use ctrl-shift-v rather than ctrl-v. Here's a typical posting (to see how this was done look at the raw markdown in Workflow.md):
+
+This code doesn't work. Help!
+```
+julia> x^2=3
+ERROR: syntax: "2" is not a valid function argument name around REPL[29]:1
+Stacktrace:
+ [1] top-level scope @ REPL[29]:1
+```
+
+It can also be helpful to include the version of Julia you are using, and what packages you have loaded. Type `versioninfo()` at the REPL to get the Julia language version number. To get the list of packages enter the package manager mode by typing `]` at the REPL and then typing `st`. Here's typical output:
+
+```
+julia> versioninfo()
+Julia Version 1.8.3
+Commit 0434deb161 (2022-11-14 20:14 UTC)
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: 32 × AMD Ryzen 9 7950X 16-Core Processor
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-13.0.1 (ORCJIT, znver3)
+  Threads: 32 on 32 virtual cores
+Environment:
+  JULIA_EDITOR = code.cmd
+```
+
+```
+(Differentiation) pkg> st
+Project Differentiation v1.0.0-alpha.1
+Status `C:\Users\seatt\source\Differentiation\Project.toml`
+  [5ae59095] Colors v0.12.10
+  [b552c78f] DiffRules v1.12.2
+  [a2cc645c] GraphPlot v0.5.2
+  [bd48cda9] GraphRecipes v0.5.12
+  [f526b714] GraphViz v0.2.0
+  [86223c79] Graphs v1.7.4
+  [b964fa9f] LaTeXStrings v1.3.0
+  [e9d8d322] Metatheory v1.3.5
+  [77ba4419] NaNMath v1.0.1
+  [91a5bcdd] Plots v1.38.0
+  [6c8a4c8a] RelevanceStacktrace v0.1.8
+  [c5292f4c] ResumableFunctions v0.6.1
+  [295af30f] Revise v3.4.0
+  [276daf66] SpecialFunctions v2.1.7
+  [90137ffa] StaticArrays v1.5.11
+  [d1185830] SymbolicUtils v0.19.11
+  [0c5d862f] Symbolics v4.13.0
+⌅ [8ea1fca8] TermInterface v0.2.3
+  [f8b46487] TestItemRunner v0.2.1
+  [1c621080] TestItems v0.1.0
+  [b4f28e30] TikzGraphs v1.4.0
+  [8dfed614] Test
+Info Packages marked with ⌅ have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated`
+```
+
+Sometimes the error message, or your code sample, is very long and you don't want to clutter your posting with too much text. You can use the `<details>...</details>` markdown command to hide these details in drop down menus:
+
+<details>
+   <summary> This text will be displayed as a short summary of what is enclosed by the details block </summary>
+[comment]: # You need a blank line between the summary line and the line beginning with ``` or the text won't format properly in markdown
+
+```
+julia> versioninfo()
+Julia Version 1.8.3
+Commit 0434deb161 (2022-11-14 20:14 UTC)
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: 32 × AMD Ryzen 9 7950X 16-Core Processor
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-13.0.1 (ORCJIT, znver3)
+  Threads: 32 on 32 virtual cores
+Environment:
+  JULIA_EDITOR = code.cmd
+```
+</details>
+
 ### Install Julia
 You can install Julia manually but don't; instead install [juliaup](https://github.com/JuliaLang/juliaup) and then use `juliaup` to install Julia for you. Follow the instructions at the link to install juliaup.
 

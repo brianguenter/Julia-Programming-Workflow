@@ -1,0 +1,662 @@
+<!DOCTYPE html><html><head>
+      <title>Workflow</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\seatt\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.6.5\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <p>Trivial</p>
+<h1 class="mume-header" id="efficient-vscode-workflow-in-julia">Efficient VSCode Workflow in Julia</h1>
+
+<h2 class="mume-header" id="introduction">Introduction</h2>
+
+<p>Julia is a programming language designed to solve the &quot;two language problem&quot;. This refers to the practice of using a quick interactive programming language, such as Python, to rapidly prototype a solution and then rewriting the prototype in a compiled language, such as C++ or Rust, for good runtime performance. Keeping the two versions of the same program in sync is a significant software engineering challenge. And, it&apos;s more difficult to learn and program in two languages than in one.</p>
+<p>Julia promises the best of both worlds: quick interactive development and good runtime performance in a single language. If you set up your Julia environment properly then Julia largely delivers on this promise. Unfortunately, some of the default environment settings do not lead to the most efficient and glitch free workflow. Most of the settings and features for efficient workflow are documented, somewhere, but it&apos;s hard to find a single document that includes all the information you need to set up your environment properly.</p>
+<p>This document is an attempt to address this issue. It will show you how to set up your Julia and VSCode environment to minimize annoying delays and ensure smooth interaction of the programming tools in the Julia ecosystem.</p>
+<p>This is not a tutorial on the Julia programming language. If that&apos;s what you want look <a href="https://julialang.org/learning/tutorials/">here</a> instead.</p>
+<p>An intermediate level of programming experience is necessary to follow these instructions. You should be comfortable working with command line interfaces. If you are an absolute beginner you may find it difficult to correctly carry out these instructions. If you use Julia primarily as a scripting language, or you do all your work in Jupyter or Pluto notebooks then this document will be overkill for you.</p>
+<h2 class="mume-header" id="beginner-problems-with-julia">Beginner problems with Julia</h2>
+
+<p>The biggest, most annoying, and perhaps unexpected problem beginners encounter is long startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code.</p>
+<p>If your project use several large packages it can take a long time to load the packages <em>every</em> time you start a new REPL session. A package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses <em>many</em> packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.</p>
+<p>The fundamental cause of this delay is that the current Julia compilation system does not cache all the compiled code generated when you first load a package. Code may be unnecessarily recompiled every time you start a new REPL session, even when the source code of the package hasn&apos;t changed.</p>
+<p>This startup latency has steadily declined over the last several years, and is likely to decline further soon. But for now it&apos;s a problem you have to work around.</p>
+<p>Another common beginner problem is figuring out how to organize your code so that Julia tools such as the VSCode IDE, the package manager, and the Revise package, work well together. These tools make assumptions about code organization that are not well documented, or at least not well documented in one place. If your code is organized according to these assumptions the tools mostly interact seamlessly. If not then the Julia programming experience can be confusing and frustrating.</p>
+<p>Finally, there are tips and tricks that are broadly useful but whose documentation is scattered and difficult to find. The last section of the document has short descriptions of several.</p>
+<h2 class="mume-header" id="set-up-your-julia-environment">Set up your Julia environment</h2>
+
+<p>You should perform the environment setup steps in the order they appear in this document. Some functionality will not work if you change this order.</p>
+<h3 class="mume-header" id="get-an-account-on-julia-discourse">Get an account on Julia Discourse</h3>
+
+<p>Don&apos;t skip this step in your eagerness to begin programming. Eventually you will hit a problem this guide won&apos;t help you fix. When this happens Julia Discourse is the place to go for answers.</p>
+<p>Whether you are a beginner or an expert you should get an account on the Julia <a href="https://discourse.julialang.org/">discourse</a> forum. The Julia community is friendly and helpful and you are likely to get an answer to your question within 24 hours. Read <a href="https://discourse.julialang.org/t/please-read-make-it-easier-to-help-you/14757">this</a> before posting.</p>
+<p>Here are tips for posting to maximize the chance of someone answering your question. Whenever possible post a complete working piece of code that others can copy and paste into the REPL and execute. This will greatly increase the odds of you getting help. When you include code in the markdown text of your post enclose it within <code></code>. This will make the code format better.</p>
+<p>The simplest way to create a posting is to copy and paste the full output of the REPL including the entire error message. To copy at the REPL you need to use ctrl-shift-c rather than ctrl-c. Similary to paste into the REPL you need to use ctrl-shift-v rather than ctrl-v. Here&apos;s a typical posting:</p>
+<p>This code doesn&apos;t work. Help!</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; x^2=3
+ERROR: syntax: &quot;2&quot; is not a valid function argument name around REPL[29]:1
+Stacktrace:
+ [1] top-level scope @ REPL[29]:1
+</code></pre><p>It can also be helpful to include the version of Julia you are using, and what packages you have loaded. Type <code>versioninfo()</code> at the REPL to get the Julia language version number. To get the list of packages enter the package manager mode by typing <code>]</code> at the REPL and then typing <code>st</code>. Here&apos;s typical output:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; versioninfo()
+Julia Version 1.8.3
+Commit 0434deb161 (2022-11-14 20:14 UTC)
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: 32 &#xD7; AMD Ryzen 9 7950X 16-Core Processor
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-13.0.1 (ORCJIT, znver3)
+  Threads: 32 on 32 virtual cores
+Environment:
+  JULIA_EDITOR = code.cmd
+</code></pre><pre data-role="codeBlock" data-info class="language-"><code>(Differentiation) pkg&gt; st
+Project Differentiation v1.0.0-alpha.1
+Status `C:\Users\seatt\source\Differentiation\Project.toml`
+  [5ae59095] Colors v0.12.10
+  [b552c78f] DiffRules v1.12.2
+  [a2cc645c] GraphPlot v0.5.2
+  [bd48cda9] GraphRecipes v0.5.12
+  [f526b714] GraphViz v0.2.0
+  [86223c79] Graphs v1.7.4
+  [b964fa9f] LaTeXStrings v1.3.0
+  [e9d8d322] Metatheory v1.3.5
+  [77ba4419] NaNMath v1.0.1
+  [91a5bcdd] Plots v1.38.0
+  [6c8a4c8a] RelevanceStacktrace v0.1.8
+  [c5292f4c] ResumableFunctions v0.6.1
+  [295af30f] Revise v3.4.0
+  [276daf66] SpecialFunctions v2.1.7
+  [90137ffa] StaticArrays v1.5.11
+  [d1185830] SymbolicUtils v0.19.11
+  [0c5d862f] Symbolics v4.13.0
+&#x2305; [8ea1fca8] TermInterface v0.2.3
+  [f8b46487] TestItemRunner v0.2.1
+  [1c621080] TestItems v0.1.0
+  [b4f28e30] TikzGraphs v1.4.0
+  [8dfed614] Test
+Info Packages marked with &#x2305; have new versions available but compatibility constraints restrict them from upgrading. To see why use `status --outdated`
+</code></pre><p>Sometimes the error message, or your code sample, is very long and you don&apos;t want to clutter your posting with too much text. You can use the <code>&lt;details&gt;...&lt;/details&gt;</code> markdown command to hide these details in drop down menus:</p>
+<details>
+   <summary> This text will be displayed as a short summary of what is enclosed by the details block </summary>
+[comment]: # You need a blank line between the summary line and the line beginning with ``` or the text won&apos;t format properly in markdown
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; versioninfo()
+Julia Version 1.8.3
+Commit 0434deb161 (2022-11-14 20:14 UTC)
+Platform Info:
+  OS: Windows (x86_64-w64-mingw32)
+  CPU: 32 &#xD7; AMD Ryzen 9 7950X 16-Core Processor
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-13.0.1 (ORCJIT, znver3)
+  Threads: 32 on 32 virtual cores
+Environment:
+  JULIA_EDITOR = code.cmd
+</code></pre></details>
+<h3 class="mume-header" id="install-julia">Install Julia</h3>
+
+<p>You can install Julia manually but don&apos;t; instead install <a href="https://github.com/JuliaLang/juliaup">juliaup</a> and then use <code>juliaup</code> to install Julia for you. Follow the instructions at the link to install juliaup.</p>
+<p>After you have installed <code>juliaup</code> open a command window and type:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>juliaup update
+</code></pre><p>This should install the latest version of Julia. In the future you will use the same command to upgrade to the latest version of Julia. This is all you need from <code>juliaup</code> for now but if you are curious what other options are available type <code>juliaup</code> at the command line and then hit enter.</p>
+<p>Once you have installed Julia open a command window and type <code>julia</code> at the prompt. This should start an interactive Julia REPL session and display something like this:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>               _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type &quot;?&quot; for help, &quot;]?&quot; for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.8.2 (2022-09-29)
+ _/ |\__&apos;_|_|_|\__&apos;_|  |  Official https://julialang.org/ release
+|__/                   
+
+julia&gt; 
+</code></pre><p>If the Julia REPL doesn&apos;t start or your prompt doesn&apos;t look anything like this go <a href="https://github.com/JuliaLang/juliaup">here</a> for troubleshooting suggestions.</p>
+<h3 class="mume-header" id="create-a-basic-startupjl-file">Create a basic startup.jl file</h3>
+
+<p>Now that Julia is installed you should create a <code>startup.jl</code> file. The instructions in the <code>startup.jl</code> file will be executed at the beginning of every interactive Julia session and ensure that important packages are automatically loaded in your interactive REPL environment.</p>
+<p>If you are a less experienced programmer the file you will create in this section is all you will need. More advanced programmers will want to also look at the Advanced setup.jl file section.</p>
+<p>On linux the startup file is located at <code>~\.julia\config\startup.jl</code>. On Windows the file will be at <code>C:\Users\YourUserName\.julia\config\startup.jl</code> Create the <code>config</code> directory if it doesn&apos;t already exist. Create a file named <code>startup.jl</code> in this directory and copy this text to it.</p>
+<pre data-role="codeBlock" data-info class="language-"><code>using Pkg
+
+let
+    pkgs = [&quot;OhMyREPL&quot;, &quot;Revise&quot;]
+    for pkg in pkgs
+        if Base.find_package(pkg) === nothing
+            Pkg.add(pkg)
+        end
+    end
+end
+
+using OhMyREPL
+
+try
+    using Revise
+catch e
+    @warn &quot;Error initializing Revise&quot; exception=(e, catch_backtrace())
+end
+</code></pre><p>This will automatically load the packages Revise and OhMyREPL every time you start a Julia REPL. Revise is a package that tracks changes to Julia source files in the background. When Revise detects a file change it automatically updates the dynamic state of any interactive REPL sessions you have running. Programming Julia without it is too painful to contemplate.</p>
+<p>The OhMyREPL package enhances the REPL by adding support for context sensitive color text and color parenthesis matching. This makes it is easier to write and edit code at the REPL.</p>
+<p>If you are a beginner you won&apos;t need more packages in your <code>startup.jl</code> file until you have much more experience with the language. You can skip the next section and go to the Set up VSCode section.</p>
+<h3 class="mume-header" id="advanced-startupjl-file">Advanced startup.jl file</h3>
+
+<p>This <code>startup.jl</code> file adds packages to help you manage github repos and to benchmark and debug code. If you are not familiar with github or have never benchmarked code you should skip this section.</p>
+<p>Create this <code>setup.jl</code> instead of the basic <code>startup.jl</code> file:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>using Pkg
+
+let
+    pkgs = [&quot;BenchmarkTools&quot;, &quot;OhMyREPL&quot;, &quot;Revise&quot;, &quot;PkgTemplates&quot;, &quot;Infiltrator&quot;]
+    for pkg in pkgs
+        if Base.find_package(pkg) === nothing
+            Pkg.add(pkg)
+        end
+    end
+end
+
+using BenchmarkTools
+using OhMyREPL
+using PkgTemplates
+using Infiltrator
+
+try
+    using Revise
+catch e
+    @warn &quot;Error initializing Revise&quot; exception=(e, catch_backtrace())
+end
+ 
+ENV[&quot;JULIA_EDITOR&quot;] = &quot;code.cmd&quot;
+</code></pre><ul>
+<li><a href="https://github.com/JuliaCI/PkgTemplates.jl">PkgTemplates</a> adds functionality that is especially useful if your code is on a github repo.</li>
+<li><a href="https://github.com/JuliaDebug/Infiltrator.jl">Infiltrator</a> is a low overhead way of inserting breakpoints in your code. Julia has an interactive debugger but it can be painfully slow if your code does significant computation. Infiltrator is fast but not as full featured as the debugger.</li>
+<li><a href="https://github.com/JuliaCI/BenchmarkTools.jl">BenchmarkTools</a> adds tools for benchmarking code. These tools will help you find and fix inefficient code.</li>
+</ul>
+<h3 class="mume-header" id="other-startup-packages-to-consider">Other startup packages to consider</h3>
+
+<ul>
+<li><a href="https://github.com/tkf/InteractiveCodeSearch.jl">InteractiveCodeSearch</a> is great for finding the source locations of functions from the REPL. It requires the installation of peco, which is easy on Linux but more complicated on Windows.</li>
+<li><a href="https://github.com/BioTurboNick/AbbreviatedStackTraces.jl">AbbreviatedStackTraces</a> shrinks stack traces to reduce irrelevant text.</li>
+</ul>
+<p>Don&apos;t add too many packages to your <code>startup.jl</code> file. Each package takes time to load and this overhead is incurred every time you start the REPL.</p>
+<h2 class="mume-header" id="set-up-vscode">Set up VSCode</h2>
+
+<p>This document assumes you will be using VSCode as your Julia IDE. It has the best support and features of the available IDE&apos;s. With VSCode installed you will rarely need to leave the IDE since the Julia language extension adds support for an interactive REPL panel, notebooks, and plotting.</p>
+<p>Install VSCode from here <a href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>. Start VSCode and click on the extension manager. Type <code>julia</code> in the extension manager search window and install the Julia language extension.</p>
+<p>The remaining setup instructions in this section are executed from within VSCode. You will need a running instance of VSCode to make these changes.</p>
+<h3 class="mume-header" id="set-auto-save-to-onfocuschange">Set <code>Auto-Save</code> to <code>onFocusChange</code></h3>
+
+<p>This setting will make the view of your source in the VSCode text editor and the dynamic state of the interactive REPL session more consistent. One of the disadvantages of interactive programming systems is that the source text you are editing in VSCode and the definitions of functions, constants, etc., in the interactive session window can get out of sync. You change a function definition in the text editor and save the file but forget to evaluate the new definition in the interactive window so it still has the old definition. This can be very confusing.</p>
+<p>The combination of Revise and auto save on focus change can almost completely eliminate this problem. Whenever the cursor moves out of the text editor window the file will be saved. Revise will detect this change and update the interactive environment in the REPL. What you see in the text editor will be a close match to what is defined in the REPL.</p>
+<p>Type <code>ctrl-shift-p</code> to open the command palette. Type <code>settings</code> in the command palette search window and select <code>Preferences:Open Settings (UI)</code>. Type <code>Files:Auto Save</code> in the settings search bar. On the drop down menu select <code>onFocusChange</code>. This will configure VSCode to automatically save your files when the cursor moves from a text editor window to a Julia command prompt window.</p>
+<p>There are some changes Revise will not update for you:</p>
+<ul>
+<li>changes to a <code>struct</code> definition</li>
+<li>changes to a <code>const</code></li>
+</ul>
+<p>Revise will warn you when you make changes like this. If you want them updated in the REPL you must kill your current REPL and start a new one.</p>
+<h3 class="mume-header" id="set-julianum-threads">Set <code>Julia:Num Threads</code></h3>
+
+<p>By default VSCode starts Julia with 1 thread enabled. To automatically enable the full number of threads available on your machine open the command palette (ctrl-shift-p), type <code>settings</code>in the command palette search bar and select <code>Preferences:Open Settings (UI)</code>. Type <code>julia:num</code> in the settings search bar. Select <code>Edit in settings.json</code> in the <code>Julia:Num Threads</code> option. Type this line into the settings.json file:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>   &quot;julia.NumThreads&quot;: &quot;auto&quot;
+</code></pre><h3 class="mume-header" id="create-your-first-project">Create your first project</h3>
+
+<p>Projects are not required for writing and executing Julia code but I strongly recommend that you use projects for all your Julia code. Many of the Julia tools assume that you have your code organized as projects and won&apos;t work well, or sometimes at all, if you don&apos;t have a project. Your workflow will be smoother and less error prone if you use projects.</p>
+<p>As you become more experienced you will want to learn <a href="https://pkgdocs.julialang.org/v1/">more</a> about packages and how they are managed. For now you can treat the package infrastructure largely as a black box; you just need to know how to create one.</p>
+<p>Open a command window in a directory where you want to put your package. Type <code>julia</code> at the command window prompt. Once the REPL starts type <code>]</code> to enter package manager mode. Let&apos;s assume your package is called Package1. Type <code>generate Package1</code> and hit enter. The package manager will create a new directory called <code>Package1</code>.</p>
+<p>To edit the package in VSCode select the open folder menu item (File-&gt;Open Folder) and navigate to the directory <code>Package1</code>. Do not navigate to the <code>src</code> subdirectory contained inside the <code>Package1</code> directory; VSCode depends on being started at the top level directory of your package to find the information it needs to set up its environment properly.</p>
+<h3 class="mume-header" id="add-packages-to-your-project">Add packages to your project</h3>
+
+<p>In VSCode use the folder view to show the files in your project. Right click on the <code>src</code> directory and select <code>New File</code> from the menu. Call this file <code>FirstProgram.jl</code>. Use the folder view to open <code>FirstProgram.jl</code> and type this:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>module Package1
+
+using Plots
+
+function first_plot()
+    x = 1:10; y = rand(10); # These are the plotting data
+    plot(x, y)
+end
+export first_plot
+
+end #module
+</code></pre><p>Now open a Julia REPL in VSCode. Open the command pallette (ctrl-shift-p) and type <code>Julia: Start REPL</code>. In the REPL type <code>]</code> to enter package manager mode.</p>
+<p>Verify that the prompt has changed to <code>Package1:</code>. If it hasn&apos;t then type <code>activate Package1</code>. This will tell the REPL where to look for the source code of your package. You can also type <code>activate .</code> to activate the package in the current directory, which is this case will be <code>Package1</code>.</p>
+<p>Type <code>add Plots</code> and hit enter. The package manager will download the <code>Plots</code> package from the Julia registry so your program will be able to find it when you execute the first_plot function.</p>
+<p>Exit package manager mode by typing backspace and then type <code>using Package1</code>. After your package loads type <code>first_plot()</code>. This should display a simple plot on a plot window in VSCode.</p>
+<h3 class="mume-header" id="set-juliause-an-existing-custom-sysimage-when-starting-the-repl">Set <code>Julia:use an existing custom sysimage when starting the REPL</code></h3>
+
+<p>Some packages, such as Plots, take a long time to load. If your project uses several such packages the startup time for a new REPL session can easily be tens of seconds. You can precompile these packages into what is called a sysimage which loads more quickly. A custom sysimage can reduce startup time from tens of seconds to less than a second. If startup time is an issue for you then you should use a precompiled sysimage.</p>
+<p>By default VSCode is not configured to use compiled sysimages. Turn this feature on by opening the command palette and typing <code>Preferences:Open Settings (UI)</code>. Then type <code>julia:use custom sysimage</code> in the settings search bar. Select the box <code>use an existing custom sysimage when starting the REPL</code>. This will make VSCode use a custom sysimage if one is available.</p>
+<p>Now you need to compile the sysimage. Open the command palette and type <code>Tasks:Run Build Task</code>. Select the option <code>Julia: Build sysimage for current environment (experimental)</code>. This will compile the files necessary to start your project into a single large file which will be loaded at startup time.</p>
+<p>If you add a new package in the package editor or update your packages the sysimage will not be automatically updated; it will still contain the code from the package versions used when the sysimage file was created. Every time you add or update packages you should rerun <code>Tasks:Run Build Task</code>, <code>Julia: build custom sysimage for current (experimental)</code>.</p>
+<p>Sometimes compiling a sysimage doesn&apos;t work. A fix that frequently works is to update all your packages. To update your packages type <code>]</code> at the <code>julia</code> command prompt to enter the package manager and type <code>update</code>. Then try running the sysimage task again.</p>
+<p>If updating your packages didn&apos;t fix the problem you may have a package that won&apos;t compile into a sysimage. You&apos;ll have to look at the stack trace in the error message to find the packages which appear to be causing precompilation to fail. You can tell VSCode which packages to exclude by creating a <code>JuliaSysimage.toml</code> file. See this <a href="https://www.julia-vscode.org/docs/stable/userguide/compilesysimage/">link</a> for detailed instructions.</p>
+<p>The contents of <code>JuliaSysimage.toml</code> will look like this:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>[sysimage]
+exclude=[&quot;FailingPackage1&quot;,&quot;FailingPackage2&quot;]   # Additional packages to be excluded in the system image
+statements_files=[]  # Precompile statements files to be used, relative to the project folder
+execution_files=[] # Precompile execution files to be used, relative to the project folder
+</code></pre><p>Notice that the names of the packages to be excluded must be in double quotes.</p>
+<h3 class="mume-header" id="starting-your-project-efficiently">Starting your project efficiently</h3>
+
+<p>Before you can begin using or debugging the code in your project you may have to load packages, define test functions and variables, etc., at the REPL. During the development phase of your code you may be restarting the REPL many times per day as you make changes that Revise can&apos;t track, or if your REPL state becomes corrupted. When this happens typing setup commands repeatedly can be tiresome.</p>
+<p>You can save time by creating a file, let&apos;s call it <code>setup.jl</code>, that contains all these commands and loading the file at the beginning of each programming session using the Julia <code>include</code> function. Place this file in the root directory of your project. Typically this setup file is only used during development. It is not meant to be included in a released package.</p>
+<p>Here&apos;s an example <code>setup.jl</code> file:</p>
+<pre data-role="codeBlock" data-info class="language-"><code># This script is for setting up the REPL environment for development of the Differentation package. No use in production.
+
+using Differentiation
+using Differentiation.Experiments
+using Differentiation.SphericalHarmonics
+
+using Symbolics
+
+@variables x y
+</code></pre><p>which you execute by typing the following command at the REPL</p>
+<pre data-role="codeBlock" data-info class="language-"><code> include(&quot;setup.jl&quot;)
+</code></pre><h2 class="mume-header" id="code-formatting-suggestions">Code formatting suggestions</h2>
+
+<h3 class="mume-header" id="autoformat-on-save">Autoformat on Save</h3>
+
+<p>If you are not using git and github this is less important. But if you are, especially if several people are working on the same project, then formatting your files every time they are saved will prevent small formatting changes from showing up as diffs that will create many trivial git commits.</p>
+<p>First set up the Julia formatter: in VSCode type <code>ctrl-shift-p</code>, select <code>Preferences:open settings (UI)</code>, then type <code>julia format</code> in the search box. In the dropdown menu for <code>Editor:default formatter</code> select <code>Julia:julialang.language-julia</code>.</p>
+<p>Now set up format on auto save: type <code>ctrl-shift-p</code>, select <code>Preferences:open settings (UI)</code>, then type <code>Editor:format on save</code> in the search box. Click the check box for the option to format on save.</p>
+<p>Now your files will automatically be formatted consistently before they are committed.</p>
+<h3 class="mume-header" id="type-function-arguments-as-generically-as-possible">Type function arguments as generically as possible</h3>
+
+<p>It is not necessary to type function arguments in Julia. The compiler will figure out the types automatically making it easy to write very generic code. However not all code is generic; sometimes only a few types make sense as arguments. In these cases adding types to the function declaration makes your code easier to read and use. For example, if this function is part of the official API of a package you are using:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>transform(obj,mat)
+</code></pre><p>what is obj, or mat? You could document this or you could add types which will automatically document it for you:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>transform(obj::Geometry,transform::SMatrix{3,4}).
+</code></pre><p>In VSCode these types will show up when you hover your mouse over the function call.</p>
+<p>If you decide to type function arguments do so as generically as possible. Example:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>multiply(a::Number,b::AbstractMatrix)
+</code></pre><p>Here <code>Number</code> is used instead of <code>Real</code> because it is more generic:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; subtypes(Number)  #subtypes, and supertype, are defined in the InteractiveUtils package. This is loaded by default in the Main module of the REPL. If you want to call it from your code you will need a using InteractiveUtils statement at the top level of your module.
+4-element Vector{Any}:
+ Complex
+ DualNumbers.Dual
+ Real
+ Static.StaticInteger
+</code></pre><p>If you know that <code>a</code> will always be a <code>Real</code> then you could type it like this:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>multiply(a::Real,b::AbstractMatrix)
+</code></pre><p>You might think that even <code>Real</code> is too generic since perhaps you expect <code>a</code> to always be <code>AbstractFloat</code> or even <code>Float64</code>. However, if you intend to use automatic differentiation on this function then you should stick with the more generic <code>Real</code>. This is because <code>ForwardDiff.Dual</code> inherits from <code>Real</code>. The dual numbers defined in <code>ForwardDiff</code> are used in automatic differentiation:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; subtypes(Real)
+12-element Vector{Any}:
+ AbstractFloat
+ AbstractIrrational
+ FixedPointNumbers.FixedPoint
+ ForwardDiff.Dual
+ Integer
+ Rational
+ Static.StaticFloat64
+ StatsBase.PValue
+ StatsBase.TestStat
+ SymbolicUtils.LiteralReal
+ SymbolicUtils.SafeReal
+ Symbolics.Num
+
+</code></pre><h3 class="mume-header" id="put-export-statements-immediately-after-function-definitions">Put export statements immediately after function definitions</h3>
+
+<p>By convention the user accessible API of a module is assumed to consist of only those names which are exported from the module. All other names are assumed to be unsupported internal functions. You export names from a module using the <code>export</code> statement. This can be placed anywhere in your module code:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; module ExportExample
+       export f1
+       
+       f1(x) = println(&quot;f1&quot;)
+       
+       f2(x) = println(&quot;f2&quot;)
+       export f2
+       end
+</code></pre><p>You can see which functions, variables, etc., are exported from a module with the <code>names</code> function:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; names(ExportExample)
+3-element Vector{Symbol}:
+ :ExportExample
+ :f1
+ :f2
+</code></pre><p>Most Julia style guides recommend you put all exported names at the top of the file. I recommend you don&apos;t, at least not until you become a more experienced Julia programmer and maybe not even then. Here&apos;s why. Suppose you delete function <code>f1</code>. If <code>f1</code> is defined at the bottom of a long file you won&apos;t see the <code>export f1</code> statement at the top. And it is likely you&apos;ll forget to remove <code>f1</code> from the export list (ask me how I know). What happens then?</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; module ExportExample
+       export f1
+       
+       f2(x) = println(&quot;f2&quot;)
+       export f2
+       end
+WARNING: replacing module ExportExample.
+</code></pre><p>Notice that <code>f1</code> is still exported even though it is no longer defined in <code>ExportExample</code>:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; names(ExportExample)
+3-element Vector{Symbol}:
+ :ExportExample
+ :f1
+ :f2
+</code></pre><p>The compiler won&apos;t complain if you export an undefined name. Why is this a problem? Lets suppose we have another module <code>M2</code> that uses <code>ExportExample</code>:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; module M2
+      using Main.ExportExample
+      f3(x) = f1(x)
+      export f3
+      end
+
+julia&gt; using Main.M2
+
+julia&gt; f3(1)
+ERROR: UndefVarError: f1 not defined
+</code></pre><p>The compiler blithely compiled module <code>M2</code> without even a warning about the undefined <code>f1</code>. The error doesn&apos;t occur until you <em>execute</em> <code>f3</code> which then calls the undefined function <code>f1</code>.</p>
+<p>This can be a big problem in a larger project with several modules. You delete a function or change its name in one module and assume everything is fine because everything compiles. Then a month later you execute some rarely used function in a different module and you see this <code>not defined</code> error, which you will waste considerable time tracking down (again, ask me how I know).</p>
+<p>If you put the <code>export</code> statement immediately after a definition then you are much less likely to forget to update it because the <code>export</code> statement will be right in front of your eyes when you edit the code.</p>
+<p>These export errors are usually caught by a test suite as part of a continuous integeration methodology, <em>if</em> you are vigilant about writing tests and have good test coverage. But when you are just starting Julia you probably don&apos;t have this machinery set up. Until you do put export statements immediately after definitions.</p>
+<h2 class="mume-header" id="tips-and-tricks">Tips and tricks</h2>
+
+<p>This last section is a grab bag of commands that you may find useful.</p>
+<h3 class="mume-header" id="for-the-repl">For the REPL</h3>
+
+<p>Starting from the <code>julia</code> prompt you can enter the different REPL modes by typing:</p>
+<ul>
+<li><code>?</code> help mode: get documentation on functions and find out what tab sequence generates a character.</li>
+<li><code>]</code> package mode: add, remove, list, update, etc. packages for your project.</li>
+<li><code>;</code> shell mode: execute command line functions. This mode works in Linux but not in Windows.<br>
+To exit any of these modes use backspace.</li>
+</ul>
+<p>You see a cool symbol &#x2222; in another person&apos;s Julia code and want to use it. How do you type it with tab completion? One way is to find the symbol on this web <a href="https://docs.julialang.org/en/v1/manual/unicode-input/">page</a> which lists all the Unicode symbols you can use tab completion to type. Another is to copy the symbol then enter help mode by typing ? at the REPL prompt. Paste the symbol into the REPL and hit enter:</p>
+<pre data-role="codeBlock" data-info class="language-"><code>help?&gt; &#x2222;
+&quot;&#x2222;&quot; can be typed by \sphericalangle&lt;tab&gt;
+</code></pre><p>Suppose you have already typed this function and want to add a line after <code>y=sqrt(x)</code></p>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; function f(x)
+       y = sqrt(x)
+       end
+</code></pre><p>Type <code>&#x2191;</code> to display the function again in the REPL. Then type <code>&#x2190;</code> to move the cursor into the function text. Use <code>&#x2191;</code> to move the cursor to where you want to enter a new line and type alt-enter.</p>
+<pre data-role="codeBlock" data-info class="language-"><code>function f(x)
+       y = sqrt(x)
+       return (y,x) #use alt-enter to create a new line here
+       end
+</code></pre><p>Need to see a compiler error message again? Type Revise.retry(). This will trigger Revise to reevaluate your functions. Doesn&apos;t always give as full an error message as killing the REPL and starting again but it is faster than reloading your enviroment from scratch.</p>
+<h3>For VSCode</h3>
+<p>Type F12 to go to a function definition.</p>
+<p>Type ctrl-shift-o to open a menu to search for a function definition by name.</p>
+<p>Refactoring code. Place the cursor in a function or variable name you want to change and type F2. Enter the new name. This mostly works in Julia, but sometimes changes parts of the code it shouldn&apos;t.</p>
+<h1>Appendix</h1>
+<h2>Gotchas</h2>
+<pre data-role="codeBlock" data-info class="language-"><code>julia&gt; f(a::Vector{Integer}) = sum(a)
+f (generic function with 2 methods)
+
+julia&gt; f([1,2,3])
+ERROR: MethodError: no method matching (::Colon)(::Int64, ::Vector{Int64})
+Closest candidates are:
+  (::Colon)(::T, ::Any, ::T) where T&lt;:Real at range.jl:41
+  (::Colon)(::A, ::Any, ::C) where {A&lt;:Real, C&lt;:Real} at range.jl:10
+  (::Colon)(::T, ::Any, ::T) where T at range.jl:40
+  ...
+Stacktrace:
+ [1] f(n::Vector{Int64})
+   @ Main .\REPL[2]:1
+ [2] top-level scope
+   @ REPL[6]:1
+
+julia&gt; f(a::Vector{T}) where{T&lt;:Integer} = sum(a)
+f (generic function with 3 methods)
+
+julia&gt; f([1,2,3])
+6
+</code></pre>
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
