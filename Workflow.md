@@ -445,9 +445,31 @@ Starting from the `julia` prompt you can enter the different REPL modes by typin
 * `;` shell mode: execute command line functions. This mode works in Linux but not in Windows.
 To exit any of these modes use backspace.
 
+Use `display` instead of `println` for nicely formatted output. Calling `println` from inside your code does not format the output as nicely as what you see in the REPL:
+ ```
+ #your code here
+ println([0 1;1 0])
+ #more of your code
+ ```
+ gives you this printout with all the array elements stuffed into a single line.
+ ```
+[0 1; 1 0]
+```
 
+If you use display instead:
+ ```
+ #your code here
+ display([0 1;1 0])
+ #more of your code
+ ```
+ you get this:
+ ```
+ 2×2 Matrix{Int64}:
+ 0  1
+ 1  0
+ ```
 
-You see a cool symbol ∢ in another person's Julia code and want to use it. How do you type it with tab completion? One way is to find the symbol on this web [page](https://docs.julialang.org/en/v1/manual/unicode-input/) which lists all the Unicode symbols you can use tab completion to type. Another is to copy the symbol then enter help mode by typing ? at the REPL prompt. Paste the symbol into the REPL and hit enter:
+You see a cool symbol ∢ in some Julia code and want to use it. How do you type it with tab completion? You can find it on this web [page](https://docs.julialang.org/en/v1/manual/unicode-input/) which lists all the tab completed Unicode symbols. Or you can copy the symbol, enter help mode by typing ? at the REPL prompt, paste the symbol into the REPL, and the hit enter:
 ```
 help?> ∢
 "∢" can be typed by \sphericalangle<tab>
