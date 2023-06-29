@@ -14,7 +14,7 @@ An intermediate level of programming experience is necessary to follow these ins
 
 ## Beginner problems with Julia
 
-The biggest, most annoying, and perhaps unexpected problem beginners encounter is long startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. 
+The biggest, most annoying, and perhaps unexpected problem beginners encounter is long startup time of your project in the REPL, the interactive window which parses your text input and executes it as Julia code. Update (6-29-2023): Julia 1.9 largely fixes the latency problems described below. I no longer find it necessary to build sysimages to reduce startup time so if you are using 1.9 or higher you can skip the section on precompiled sysimages. Latency is supposed to be even lower in Julia 1.10 which will be released soon(ish).
 
 If your project use several large packages it can take a long time to load the packages *every* time you start a new REPL session. A package I worked on, OpticSim.jl, takes 98 seconds to load on my computer (OpticSim uses *many* packages). After using the environment settings described later in this document OpticSim load time was reduced to 866ms, a 113x speedup.
 
@@ -33,7 +33,7 @@ Don't skip this step in your eagerness to begin programming. Eventually you will
 
 Whether you are a beginner or an expert you should get an account on the Julia [discourse](https://discourse.julialang.org/) forum. The Julia community is friendly and helpful and you are likely to get an answer to your question within 24 hours. Read [this](https://discourse.julialang.org/t/please-read-make-it-easier-to-help-you/14757) before posting.
 
-Here are tips for posting to maximize the chance of someone answering your question. Whenever possible post a complete working piece of code that others can copy and paste into the REPL and execute. This will greatly increase the odds of you getting help. When you include code in the markdown text of your post enclose it within ``` ```. This will make the code format better. 
+Here are tips for posting to maximize the chance of someone answering your question. Whenever possible post a complete working piece of code that others can copy and paste into the REPL and execute. This will greatly increase the odds of you getting help. When you include code in the markdown text of your post enclose it within \``` \```. This will make the code format better. 
 
 The simplest way to create a posting is to copy and paste the full output of the REPL including the entire error message. To copy at the REPL you need to use ctrl-shift-c rather than ctrl-c. Similary to paste into the REPL you need to use ctrl-shift-v rather than ctrl-v. Here's a typical posting (to see how this was done look at the raw markdown in Workflow.md):
 
